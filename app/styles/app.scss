@@ -1,0 +1,34 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
+@import 'default/colors';
+@import 'components/audio-playlist';
+@import 'components/audio-player';
+
+html,
+body{
+  display: flex;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+}
+
+body > .ember-view {
+  width: 100%;
+  height: 100%;
+}
+
+p,a,h1,h2,h3,h4,h5{
+  font-family: $font-family;
+}
+/*Playlist */
+main {
+  position: relative;
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+.play__navigation {
+  width: 20%;
+  height: 100%;
+  background: green;
+}

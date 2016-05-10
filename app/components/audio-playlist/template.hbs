@@ -1,0 +1,18 @@
+{{yield}}
+<h2 class="audio__playlist__title">Play list:</h2>
+<div class="audio__playlist__header">
+  <div>SONG</div>
+  <div>ARTIST</div>
+  <div>ALBUM</div>
+  <div>DATE</div>
+</div>
+<div class="audio__playlist__body">
+  {{#each playlist as |track index|}}
+    <div class="audio__playlist__item {{eq index playing 'active__track'}}"  >
+      <p>{{truncate-text track.name 20}}</p>
+      <p>{{truncate-text track.artist 10}}</p>
+      <p>{{truncate-text track.album 15}}</p>
+      <p>{{moment-from-now track.date}}</p>
+    </div>
+  {{/each}}
+</div>
