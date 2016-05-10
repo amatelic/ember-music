@@ -1,0 +1,27 @@
+<div class="audio__player">
+  <div class="audio__track">
+    <div class="step__button">{{fa-icon "fa-step-backward"}}</div>
+    <div {{action 'play'}} class="play__button">
+      {{#if toggle}}
+        {{fa-icon "pause"}}
+      {{else}}
+        {{fa-icon "play"}}
+      {{/if}}
+    </div>
+    <div class="step__button">{{fa-icon "fa-step-forward"}}</div>
+  </div>
+  <div class="duration__time">
+    <div class="duration__time__numbers">
+      <p>{{music-timer currentTime}}</p>
+    </div>
+    <div class="duration__time__range">
+      <input {{action 'setPosition' on="change"}} type="range" class="player_range" max={{duration}} value="{{currentTime}}">
+    </div>
+  </div>
+  <div {{action 'repeat'}} class="repeat__button">
+    {{fa-icon "repeat"}}
+  </div>
+  <div class="volume__range">
+    <input {{action 'setVolume' on="change"}} type="range" class="volume_range" max=100 value="{{volume}}">
+  </div>
+</div>

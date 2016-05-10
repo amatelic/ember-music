@@ -1,0 +1,93 @@
+html,
+body{
+  padding: 0;
+  margin: 0;
+}
+.audio__player {
+  background: rgba(0, 0, 0, 0.9);
+  display: flex;
+  color: white;
+  justify-content: center;
+  height: auto;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+}
+.audio__track{
+  width: 15%;
+  display: flex;
+  margin-left: 15px;
+  padding: 10px 0px;
+  justify-content: space-between;
+}
+.step__button {
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
+}
+
+.play__button {
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.duration__time > input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border: 1px solid #000000;
+  height: 16px;
+  width: 16px;
+  border-radius: 10px;
+  background: #ffffff;
+  cursor: pointer;
+  /*margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */*/
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; /* Add cool effects to your sliders! */
+}
+
+.repeat__button {
+  width: 5%;
+  color:white;
+  display: flex;
+  font-size: 1.2em;
+  align-items: center;
+  justify-content: center;
+}
+
+.duration__time {
+    width: 60%;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+.duration__time__numbers {
+  display: flex;
+  justify-content: center;
+  width: 15%;
+}
+
+.duration__time__numbers p{
+  width: auto;
+}
+
+.duration__time__range {
+  width: 80%;
+}
+
+.duration__time__range > input[type=range] {
+    width: 100%;
+    height: 5px;
+    margin-bottom: 5px;
+    background: green;
+    -webkit-appearance: none;
+}
+
+.volume__range {
+  display: flex;
+  justify-content: center;
+  margin: 7px;
+}
