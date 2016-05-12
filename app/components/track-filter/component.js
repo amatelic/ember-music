@@ -1,9 +1,10 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  query: 'null',
   actions: {
-    selectTrack(trackIndex) {
-      this.set('playing', trackIndex);
+    filterTrack(e, a) {
+      console.log(this.get('query'), e, a);
     },
   },
 });

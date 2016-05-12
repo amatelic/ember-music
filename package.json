@@ -25,6 +25,7 @@
     "ember-cli": "2.4.2",
     "ember-cli-app-version": "^1.0.0",
     "ember-cli-babel": "^5.1.5",
+    "ember-cli-content-security-policy": "0.5.0",
     "ember-cli-dependency-checker": "^1.2.0",
     "ember-cli-htmlbars": "^1.0.1",
     "ember-cli-htmlbars-inline-precompile": "^0.3.1",
@@ -39,12 +40,15 @@
     "ember-drag-drop": "^0.3.3",
     "ember-export-application-global": "^1.0.4",
     "ember-font-awesome": "2.1.0",
+    "ember-json-api": "^0.6.0",
     "ember-load-initializers": "^0.5.0",
     "ember-moment": "6.1.0",
     "ember-resolver": "^2.0.3",
     "loader.js": "^4.0.0"
   },
   "dependencies": {
-    "ember-cli-sass": "^5.3.1"
+    "cors": "^2.7.1",
+    "ember-cli-sass": "^5.3.1",
+    "express": "^4.13.4"
   }
 }

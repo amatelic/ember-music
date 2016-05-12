@@ -1,6 +1,10 @@
 <main>
   {{audio-navigation}}
-  {{audio-playlist playlist=model.tracks playing=model.playing}}
+  <div class="audio__playlist">
+    <h2 class="audio__playlist__title">Play list:</h2>
+    {{track-filter class="audio__playlist__filter" playlist=model.tracks}}
+    {{audio-playlist playlist=model.tracks playing=model.playing}}
+  </div>
 </main>
 {{audio-player playlist=model.tracks playing=model.playing class='video__player'}}
 {{outlet}}

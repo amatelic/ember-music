@@ -5,7 +5,7 @@ export function musicTimer(params/*, hash*/) {
 }
 
 function seconds(time) {
-  var time = parseInt(time % 60);
+  time = parseInt(time % 60);
   return (time < 10) ? '0' + time : time;
 }
 

@@ -9,6 +9,11 @@ export default Ember.Component.extend({
   currentTime: 0,
   durration: 0,
   volume: 100,
+  trackHasChanged: Ember.observer('playing', function() {
+    var track = this.getTrackName();
+    this.changeAudio(track.path);
+  }),
+
   actions: {
     toggle() {
       this.togglePlayer();
@@ -46,14 +51,19 @@ export default Ember.Component.extend({
   },
   init() {
     this._super(...arguments);
-    const index = this.get('playing');
-    const track = this.get('playlist').objectAt(index);
+    const track = this.getTrackName();
+    console.log(track.get('path'))
     this.set('audio', new Audio(track.path));
     this.get('audio').ontimeupdate = () => {
       if (this.get('toggle')) {
         this.set('currentTime', this.get('audio').currentTime);
       }
     };
+  },
+
+  getTrackName() {
+    const index = this.get('playing');
+    return this.get('playlist').objectAt(index);
   },
 
   changeAudio(audio) {
