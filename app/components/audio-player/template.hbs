@@ -1,7 +1,7 @@
 <div class="audio__player">
   <div class="audio__track">
     <div {{action 'changeTruck' -1 }} class="step__button">{{fa-icon "fa-step-backward"}}</div>
-    <div {{action 'toggle'}} class="play__button">
+    <div {{action 'toggleTrack'}} class="play__button">
       {{#if toggle}}
         {{fa-icon "pause"}}
       {{else}}

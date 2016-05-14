@@ -10,13 +10,13 @@ export default Ember.Component.extend({
   durration: 0,
   volume: 100,
   trackHasChanged: Ember.observer('playing', function() {
-    var track = this.getTrackName();
+    let track = this.getTrackName();
     this.changeAudio(track.path);
   }),
 
   actions: {
-    toggle() {
-      this.togglePlayer();
+    toggleTrack() {
+      this.playingTrack();
     },
 
     setVolume() {
@@ -52,7 +52,6 @@ export default Ember.Component.extend({
   init() {
     this._super(...arguments);
     const track = this.getTrackName();
-    console.log(track.get('path'))
     this.set('audio', new Audio(track.path));
     this.get('audio').ontimeupdate = () => {
       if (this.get('toggle')) {
@@ -70,11 +69,13 @@ export default Ember.Component.extend({
     this.get('audio').pause();
     this.set('audio.src', audio);
     this.get('audio').play();
+    this.set('toggle', true);
+    this.set('duration', this.get('audio').duration);
+
   },
 
-  togglePlayer() {
+  playingTrack() {
     this.toggleProperty('toggle');
-
     if (this.get('toggle')) {
       this.get('audio').play();
     } else {

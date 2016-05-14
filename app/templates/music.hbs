@@ -2,9 +2,12 @@
   {{audio-navigation}}
   <div class="audio__playlist">
     <h2 class="audio__playlist__title">Play list:</h2>
-    {{track-filter class="audio__playlist__filter" playlist=model.tracks}}
-    {{audio-playlist playlist=model.tracks playing=model.playing}}
+    {{track-filter class="audio__playlist__filter" filterTracks="filterTracks"}}
+    {{audio-playlist playlist=tracks playing=model.playing}}
+    {{#file-picker dropzone=true preview=false fileLoaded="fileLoaded"}}
+      Drop zone
+    {{/file-picker}}
   </div>
 </main>
-{{audio-player playlist=model.tracks playing=model.playing class='video__player'}}
+{{audio-player playlist=tracks playing=model.playing class='video__player'}}
 {{outlet}}

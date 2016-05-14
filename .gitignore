@@ -7,7 +7,7 @@
 # dependencies
 /node_modules
 /bower_components
-
+/servers/musics
 # misc
 /.sass-cache
 /connect.lock
