@@ -1,1 +1,25 @@
-<h3>Playlist:</h3>
+<div class="playlist__directory">
+  <h3>Playlist:</h3>
+  <div class="playlist__folders">
+    {{#if addNewFile}}
+      <div class="playlist__add">
+        <input onkeyup={{action "addNewFolder" }} autofocus="true" type="text" name="name" placeholder="Playlist">
+      </div>
+    {{/if}}
+    <ul class="playlist__list">
+      {{#each folders as |folder|}}
+      <li class="playlist__item">
+        {{fa-icon "music"}}
+        <p>{{folder}}</p>
+      </li>
+      {{/each}}
+    </ul>
+  </div>
+</div>
+
+<div {{action "addFolder" }}class="playlist__create">
+  <div class="playlist__icon">
+    {{fa-icon "plus"}}
+  </div>
+  <p class="playlist__text"> New playlist </p>
+</div>

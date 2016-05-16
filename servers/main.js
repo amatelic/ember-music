@@ -6,6 +6,7 @@ const multer  = require('multer');
 var crypto = require('crypto');
 const fs = require('fs');
 const cors = require('cors');
+const mkdirp = require('mkdirp');
 const port = 5000;
 var app = express();
 app.use(cors());
@@ -53,6 +54,10 @@ app.get('/music', (req, res) => {
 });
 app.post('/upload', upload.single('test'), (req, res) => {
   console.log(req.files)
+});
+
+app.post('/new_folder', (req, res) => {
+  mkdirp(`${__dirname}/dir/${req.body.name}`);
 });
 
 app.use('/musics', express.static(__dirname + '/musics'));

@@ -30,9 +30,21 @@ export default Ember.Route.extend({
       }));
     },
 
+    createFolder(name) {
+      Ember.$.ajax({
+        type: 'POST',
+        url: 'http://localhost:5000/new_folder',
+        data: {
+          name: name,
+        },
+        success: function () {
+          alert('Directory created');
+        },
+      });
+    },
+
     fileLoaded(file) {
       let data = new FormData();
-      console.log(file)
       data.append('test', file);
       Ember.$.ajax({
         type: 'POST',
@@ -42,7 +54,7 @@ export default Ember.Route.extend({
         contentType:false,
         data: data,
         success: function () {
-            alert('Data Uploaded: ');
+          alert('Data Uploaded: ');
         },
       });
       return false;

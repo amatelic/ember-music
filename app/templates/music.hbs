@@ -1,12 +1,14 @@
 <main>
-  {{audio-navigation}}
+  {{audio-navigation createFolder="createFolder"}}
   <div class="audio__playlist">
     <h2 class="audio__playlist__title">Play list:</h2>
-    {{track-filter class="audio__playlist__filter" filterTracks="filterTracks"}}
+    <div class="audio__playlist__controls">
+      {{track-filter class="audio__playlist__filter" filterTracks="filterTracks"}}
+      {{#file-picker dropzone=true preview=false fileLoaded="fileLoaded"}}
+        Drag track
+      {{/file-picker}}
+    </div>
     {{audio-playlist playlist=tracks playing=model.playing}}
-    {{#file-picker dropzone=true preview=false fileLoaded="fileLoaded"}}
-      Drop zone
-    {{/file-picker}}
   </div>
 </main>
 {{audio-player playlist=tracks playing=model.playing class='video__player'}}
