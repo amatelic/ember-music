@@ -1,6 +1,6 @@
 const express = require('express');
-const audioMetaData = require('audio-metadata');
 const bodyParser = require('body-parser');
+var accessMusic = require('./access-music');
 var mime = require('mime');
 const multer  = require('multer');
 var crypto = require('crypto');
@@ -25,23 +25,6 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage });
 app.use(bodyParser.urlencoded({extended: true}));
 
-const directory = fs.readdirSync(__dirname + '/musics');
-const data = directory.map((path, i) => {
-  var oggData = fs.readFileSync(`${__dirname}/musics/${path}`);
-  var metadata = audioMetaData.id3v2(oggData);
-  var data = fs.lstatSync(`${__dirname}/musics/${path}`);
-  return {
-    type: 'music',
-    id: i,
-    attributes: {
-      name: metadata.title,
-      artist: metadata.artist,
-      album: 'Code Geass',
-      path: `http://localhost:5000/musics/${path}`,
-      date: data.ctime,
-    },
-  };
-});
 
 app.get('/', (req, res) => {
   res.send('test');
@@ -49,7 +32,7 @@ app.get('/', (req, res) => {
 
 app.get('/music', (req, res) => {
   res.json({
-    data: data,
+    data: accessMusic.getDirectory('all'),
   });
 });
 app.post('/upload', upload.single('test'), (req, res) => {
@@ -57,7 +40,7 @@ app.post('/upload', upload.single('test'), (req, res) => {
 });
 
 app.post('/new_folder', (req, res) => {
-  mkdirp(`${__dirname}/dir/${req.body.name}`);
+  // mkdirp(`${__dirname}/dir/${req.body.name}`);
 });
 
 app.use('/musics', express.static(__dirname + '/musics'));

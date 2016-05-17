@@ -3,13 +3,17 @@
   <div class="audio__playlist">
     <h2 class="audio__playlist__title">Play list:</h2>
     <div class="audio__playlist__controls">
-      {{track-filter class="audio__playlist__filter" filterTracks="filterTracks"}}
+      {{track-filter filterTracks="filterTracks"}}
       {{#file-picker dropzone=true preview=false fileLoaded="fileLoaded"}}
         Drag track
       {{/file-picker}}
     </div>
-    {{audio-playlist playlist=tracks playing=model.playing}}
+    {{audio-playlist changeTrack="changeTrack" playlist=tracks playing=model.playing}}
   </div>
 </main>
-{{audio-player playlist=tracks playing=model.playing class='video__player'}}
+{{audio-player
+    newTrack=newTrack
+    playlist=tracks
+    playing=model.playing
+    }}
 {{outlet}}

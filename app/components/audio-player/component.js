@@ -1,6 +1,7 @@
 import Ember from 'ember';
 //https://teamgaslight.com/blog/a-beginners-guide-to-the-ember-run-loop
 export default Ember.Component.extend({
+  classNames: ['video__player'],
   playlist: [],
   playListIndex: 0,
   audio: null,
@@ -9,9 +10,10 @@ export default Ember.Component.extend({
   currentTime: 0,
   durration: 0,
   volume: 100,
-  trackHasChanged: Ember.observer('playing', function() {
+  trackHasChanged: Ember.observer('newTrack', function() {
     let track = this.getTrackName();
-    this.changeAudio(track.path);
+    this.changeAudio(track.get('path'));
+    this.set('newTrack', false);
   }),
 
   actions: {
@@ -28,14 +30,19 @@ export default Ember.Component.extend({
       this.set('audio.loop', !this.get('audio.loop'));
     },
 
+    /**
+     * Changing to the next track
+     * @param numer   values [-1 or 1]
+     * @return none
+     */
     changeTruck(position) {
       let track = this.get('playing') + position;
       let len = this.get('playlist').length;
       track = track % len;
       track = (track < 0) ? len - 1 : track;
       this.set('playing', track);
-      var newAudio = this.get('playlist').objectAt(this.get('playing'));
-      this.changeAudio(newAudio.path);
+      var newAudio = this.get('playlist').toArray()[track];
+      this.changeAudio(newAudio.get('path'));
     },
     /**
      * @TODO find a way how to not distrby the avdio
@@ -52,7 +59,7 @@ export default Ember.Component.extend({
   init() {
     this._super(...arguments);
     const track = this.getTrackName();
-    this.set('audio', new Audio(track.path));
+    this.set('audio', new Audio(track.get('path')));
     this.get('audio').ontimeupdate = () => {
       if (this.get('toggle')) {
         this.set('currentTime', this.get('audio').currentTime);
@@ -60,10 +67,22 @@ export default Ember.Component.extend({
     };
   },
 
+  /**
+   * Gets the index of the track and return an ember music object
+   * @param null
+   * @return Ember Object[Musis]   -- basic data of file
+   */
+
   getTrackName() {
     const index = this.get('playing');
-    return this.get('playlist').objectAt(index);
+    return (this.get('playlist').toArray()[index]);
   },
+
+  /**
+   * Resets and changes track for audio
+   * @param String   --path to audio file
+   * @return null
+   */
 
   changeAudio(audio) {
     this.get('audio').pause();
@@ -73,6 +92,10 @@ export default Ember.Component.extend({
     this.set('duration', this.get('audio').duration);
 
   },
+
+  /**
+   * Method for toggeling tracks
+   */
 
   playingTrack() {
     this.toggleProperty('toggle');

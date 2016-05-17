@@ -3,15 +3,12 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   model() {
     return Ember.RSVP.hash({
-       tracks: this.store.findAll('music').then(musics => {
-         return musics.map(music => Ember.Object.create(music.toJSON()));
-       }),
+       tracks: this.store.findAll('music'),
        playing: 0,
      });
   },
 
   fileLoaded(e) {
-     console.log(e);
      this.controllerFor('music').set('removePreview', true);
      this.controllerFor('music').set('errors', false);
    },
@@ -41,6 +38,10 @@ export default Ember.Route.extend({
           alert('Directory created');
         },
       });
+    },
+
+    changeTrack() {
+      this.controllerFor('music').set('newTrack', true);
     },
 
     fileLoaded(file) {
