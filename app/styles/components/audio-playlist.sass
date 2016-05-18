@@ -12,6 +12,7 @@
   border-top: 2px solid $audio__player__break_lines
   justify-content: space-around
   font-family: $font-family
+  user-select: none
 
 
 .audio__playlist__title
@@ -26,6 +27,12 @@
 
 .audio__playlist__item
   display: flex
+  -webkit-touch-callout: none 
+  -webkit-user-select: none   
+  -khtml-user-select: none    
+  -moz-user-select: none     
+  -ms-user-select: none       
+  user-select: none          
   justify-content: space-around
 .active__track
   background: $audio__player__active

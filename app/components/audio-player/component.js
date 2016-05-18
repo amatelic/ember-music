@@ -10,10 +10,18 @@ export default Ember.Component.extend({
   currentTime: 0,
   durration: 0,
   volume: 100,
+  /**
+   * Observer for tracking if a track was changed in the playlist
+   * (observer is called only from music route)
+   * this.get('newTrack') -> is ember audio object
+   */
   trackHasChanged: Ember.observer('newTrack', function() {
-    let track = this.getTrackName();
-    this.changeAudio(track.get('path'));
-    this.set('newTrack', false);
+    let track = this.get('newTrack');
+    if (track !== null) {
+      this.changeAudio(track.get('path'));
+    }
+    
+    this.set('newTrack', null);
   }),
 
   actions: {

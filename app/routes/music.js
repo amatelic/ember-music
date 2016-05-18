@@ -15,6 +15,7 @@ export default Ember.Route.extend({
 
   setupController: function(controller, model) {
     this._super(controller, model);
+    controller.set('all-tracks', model.tracks);
     controller.set('tracks', model.tracks);
   },
 
@@ -40,8 +41,8 @@ export default Ember.Route.extend({
       });
     },
 
-    changeTrack() {
-      this.controllerFor('music').set('newTrack', true);
+    changeTrack(track) {
+      this.controllerFor('music').set('newTrack', track);
     },
 
     fileLoaded(file) {
