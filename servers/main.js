@@ -17,7 +17,6 @@ var storage = multer.diskStorage({
 
   filename: function (req, file, cb) {
     crypto.pseudoRandomBytes(16, function (err, raw) {
-      console.log(file.originalname)
       cb(null, file.originalname);
     });
   }
@@ -36,11 +35,11 @@ app.get('/music', (req, res) => {
   });
 });
 app.post('/upload', upload.single('test'), (req, res) => {
-  console.log(req.files)
+  accessMusic.getData(req.file.filename, (file) => res.json({data: file}));
 });
 
 app.post('/new_folder', (req, res) => {
-  // mkdirp(`${__dirname}/dir/${req.body.name}`);
+  mkdirp(`${__dirname}/dir/${req.body.name}`);
 });
 
 app.use('/musics', express.static(__dirname + '/musics'));

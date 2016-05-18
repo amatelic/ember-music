@@ -1,5 +1,5 @@
 import Ember from 'ember';
-
+import $ from 'jquery';
 export default Ember.Route.extend({
   model() {
     return Ember.RSVP.hash({
@@ -34,7 +34,7 @@ export default Ember.Route.extend({
         data: {
           name: name,
         },
-        success: function () {
+        success: function (res) {
           alert('Directory created');
         },
       });
@@ -47,16 +47,18 @@ export default Ember.Route.extend({
     fileLoaded(file) {
       let data = new FormData();
       data.append('test', file);
-      Ember.$.ajax({
+      $.ajax({
         type: 'POST',
         url: 'http://localhost:5000/upload',
-        dataType: 'multipart/form-data',
+        dataType: 'json',
         processData:false,
         contentType:false,
         data: data,
-        success: function () {
-          alert('Data Uploaded: ');
+        async: true,
+        success: res => {
+          this.store.createRecord('music', res.data.attributes);
         },
+        error: (d) => {console.error(d)}
       });
       return false;
     },

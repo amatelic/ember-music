@@ -1,9 +1,10 @@
 const audioMetaData = require('audio-metadata');
 const fs = require('fs');
+const directory = fs.readdirSync(__dirname + '/musics');
+let directoryLength = directory.length;
 
 function start() {
-  const directory = fs.readdirSync(__dirname + '/musics');
-
+  console.log('loading files');
   return directory.map((path, i) => {
     var oggData = fs.readFileSync(`${__dirname}/musics/${path}`);
     return setConfig(oggData, path, i);
@@ -11,8 +12,18 @@ function start() {
 
 }
 
+function getFile(track, callback) {
+  let path = `${__dirname}/musics`;
+  directoryLength++;
+  fs.readFile(`${path}/${track}`, (err, file) => {
+    let trackInfo = setConfig(file, track, directoryLength);
+    callback(trackInfo);
+  });
+}
+
 function setConfig(mp3File, path, i) {
   var metadata = audioMetaData.id3v2(mp3File);
+  // console.log(metadata, path)
   return {
     type: 'music',
     id: i,
@@ -28,4 +39,5 @@ function setConfig(mp3File, path, i) {
 
 module.exports = {
   start,
+  getData: getFile,
 };

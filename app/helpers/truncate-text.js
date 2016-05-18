@@ -1,6 +1,9 @@
 import Ember from 'ember';
 
 export function truncateText(params/*, hash*/) {
+  if (params[0] === undefined) {
+    return;
+  }
   var text = params[0];
   var len = params[1];
   text = (text.length > len) ? `${text.substr(0, len - 3)}...` : text;
