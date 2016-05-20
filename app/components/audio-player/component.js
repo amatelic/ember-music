@@ -20,7 +20,7 @@ export default Ember.Component.extend({
     if (track !== null) {
       this.changeAudio(track.get('path'));
     }
-    
+
     this.set('newTrack', null);
   }),
 
@@ -45,7 +45,7 @@ export default Ember.Component.extend({
      */
     changeTruck(position) {
       let track = this.get('playing') + position;
-      let len = this.get('playlist').length;
+      let len = this.get('playlist').toArray().length;
       track = track % len;
       track = (track < 0) ? len - 1 : track;
       this.set('playing', track);
@@ -68,6 +68,7 @@ export default Ember.Component.extend({
     this._super(...arguments);
     const track = this.getTrackName();
     this.set('audio', new Audio(track.get('path')));
+    // this.set('audio.volume', 0); // remove
     this.get('audio').ontimeupdate = () => {
       if (this.get('toggle')) {
         this.set('currentTime', this.get('audio').currentTime);

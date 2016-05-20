@@ -6,14 +6,20 @@
 
 .audio__playlist__header
   display: flex
+  height: 10%
   margin: 5px 0px
-  padding: 2px opx
+  padding: 2px 0px
   border-bottom: 2px solid $audio__player__break_lines
   border-top: 2px solid $audio__player__break_lines
   justify-content: space-around
   font-family: $font-family
   user-select: none
 
+.audio__playlist__main
+  height: 80%
+  width: 100%
+  display: flex
+  flex-direction: column
 
 .audio__playlist__title
   font-size: 1.5em
@@ -21,21 +27,24 @@
   margin-left: 25px
 
 .audio__playlist__body
-  overflow-y: scroll
-  height: 310px
+  height: 100%
   margin-top: 10px
+  padding-bottom: 12%
+  overflow-y: scroll
 
 .audio__playlist__item
   display: flex
-  -webkit-touch-callout: none 
-  -webkit-user-select: none   
-  -khtml-user-select: none    
-  -moz-user-select: none     
-  -ms-user-select: none       
-  user-select: none          
+  -webkit-touch-callout: none
+  -webkit-user-select: none
+  -khtml-user-select: none
+  -moz-user-select: none
+  -ms-user-select: none
+  user-select: none
   justify-content: space-around
 .active__track
   background: $audio__player__active
 
 .audio__playlist__controls
+  width: 100%
+  height: 20%
   display: flex
