@@ -1,5 +1,10 @@
 <main>
-  {{audio-navigation createFolder="createFolder"}}
+  {{audio-navigation
+    directory=directory
+    directories=directories
+    createFolder="createFolder"
+    changeDirectory="changeDirectory"
+  }}
   <div class="audio__playlist">
     <div class="audio__playlist__controls">
       {{track-filter filterTracks="filterTracks"}}

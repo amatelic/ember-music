@@ -4,6 +4,6 @@ export default JSONAPIAdapter.extend({
   host: 'http://localhost:5000',
   defaultSerializer: '-default',
   pathForType: function(type) {
-  return Ember.String.underscore(type);
+    return Ember.String.underscore(type);
   }
 });

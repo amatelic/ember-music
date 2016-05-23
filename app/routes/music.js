@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import  App from '../app';
 import $ from 'jquery';
 export default Ember.Route.extend({
   model() {
@@ -17,6 +18,8 @@ export default Ember.Route.extend({
     this._super(controller, model);
     controller.set('all-tracks', model.tracks);
     controller.set('tracks', model.tracks);
+    controller.set('directory', App.storeMeta.music.directory);
+    controller.set('directories', App.storeMeta.music.allDirectories);
   },
 
   actions: {
@@ -59,9 +62,20 @@ export default Ember.Route.extend({
         success: res => {
           this.store.createRecord('music', res.data.attributes);
         },
-        error: (d) => {console.error(d)}
+
+        error: (d) => {
+          console.error(d);
+        },
+
       });
       return false;
+    },
+
+    changeDirectory(folder) {
+      this.controllerFor('music').set('directory', folder);
+      folder = folder.toLowerCase();
+      this.store.unloadAll();
+      this.store.queryRecord('music', { params: folder, reload: true });
     },
   },
 });

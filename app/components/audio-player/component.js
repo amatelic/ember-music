@@ -3,6 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   classNames: ['video__player'],
   playlist: [],
+  repeatIsActive: false,
   playListIndex: 0,
   audio: null,
   loop: false,
@@ -35,6 +36,7 @@ export default Ember.Component.extend({
     },
 
     repeat() {
+      this.toggleProperty('repeatIsActive');
       this.set('audio.loop', !this.get('audio.loop'));
     },
 
@@ -50,7 +52,7 @@ export default Ember.Component.extend({
       track = (track < 0) ? len - 1 : track;
       this.set('playing', track);
       var newAudio = this.get('playlist').toArray()[track];
-      this.changeAudio(newAudio.get('path'));
+      this.set('newTrack', newAudio); //Change track because observer fire after playing track
     },
     /**
      * @TODO find a way how to not distrby the avdio

@@ -18,7 +18,7 @@
       <input {{action 'setPosition' on="change"}} type="range" class="player_range" max={{duration}} value="{{currentTime}}">
     </div>
   </div>
-  <div {{action 'repeat'}} class="repeat__button">
+  <div {{action 'repeat'}} class="{{eq repeatIsActive 'is--Active'}} repeat__button">
     {{fa-icon "repeat"}}
   </div>
   <div class="volume__range">

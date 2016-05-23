@@ -3,24 +3,25 @@ import $ from 'jquery';
 export default Ember.Component.extend({
   addNewFile: false,
   classNames: ['audio__navigation'],
-  folders: ['all', 'french', 'spain'],
   actions: {
     addFolder() {
-      console.log('bla')
-      this.set('addNewFile', true);
-      $('.playlist__add').find('input').focus();
+      this.toggleProperty('addNewFile');
+      // code here will execute within a RunLoop in about 500ms with this == myContext
+
     },
 
     addNewFolder(e) {
       if (e.which === 13) {
-        this.set('addNewFile', false);
+        this.toggleProperty('addNewFile');
         this.sendAction('createFolder', e.target.value);
-        e.target.value = ' ';
+        e.target.value = '';
       }
+
       //bug for adding again
-      $('body').one('click', (e) => {
-        this.set('addNewFile', false);
-      });
+    },
+
+    selectFolder(folder) {
+      this.sendAction('changeDirectory', folder);
     },
   },
 });

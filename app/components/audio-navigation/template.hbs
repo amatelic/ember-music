@@ -7,8 +7,8 @@
       </div>
     {{/if}}
     <ul class="playlist__list">
-      {{#each folders as |folder|}}
-      <li class="playlist__item">
+      {{#each directories as |folder|}}
+      <li {{action 'selectFolder' folder}}class="playlist__item {{eq folder directory 'playlist__directory__active'}}">
         {{fa-icon "music"}}
         <p>{{folder}}</p>
       </li>
