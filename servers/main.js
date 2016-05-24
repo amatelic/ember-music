@@ -21,6 +21,7 @@ var storage = multer.diskStorage({
     });
   },
 });
+
 var upload = multer({ storage: storage });
 app.use(bodyParser.urlencoded({extended: true}));
 
@@ -34,7 +35,7 @@ app.get('/music', (req, res) => {
   res.json({
     meta: {
       directory: path,
-      allDirectories: ['all', 'anime'],
+      allDirectories: accessMusic.getDirectories(),
     },
     data: accessMusic.getDirectory(path),
   });
@@ -48,7 +49,8 @@ app.post('/upload', upload.single('file'), (req, res) => {
 });
 
 app.post('/new_folder', (req, res) => {
-  mkdirp(`${__dirname}/dir/${req.body.name}`);
+  accessMusic.createDirectory(req.body.name);
+  res.json({status: 200, dir: req.body.name});
 });
 
 app.use('/musics', express.static(__dirname + '/musics'));

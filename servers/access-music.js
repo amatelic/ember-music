@@ -7,10 +7,22 @@ storage.initSync({
 });
 
 module.exports = {
-  addTrackToDirectory(directory, track) {},
+  addTrackToDirectory(directory, track) {
+
+  },
+
   getData: db.getData,
   getDirectory(name) {
     return storage.getItem(name);
+  },
+
+  getDirectories() {
+    return storage.keys();
+  },
+
+  createDirectory(name) {
+    storage.setItem(name, []);
+    storage.persistKey(name);
   },
 
   saveFile(directory, file) {
@@ -19,5 +31,5 @@ module.exports = {
       dir.push(d);
       storage.setItem(directory, dir);
     });
-  }
-}
+  },
+};

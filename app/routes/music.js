@@ -38,8 +38,8 @@ export default Ember.Route.extend({
         data: {
           name: name,
         },
-        success: function (res) {
-          alert('Directory created');
+        success: (res) => {
+          this.controllerFor('music').get('directories').addObject(res.dir);
         },
       });
     },
