@@ -12,4 +12,12 @@ module.exports = {
   getDirectory(name) {
     return storage.getItem(name);
   },
+
+  saveFile(directory, file) {
+    var dir = storage.getItem(directory);
+    db.getData(file, (d) => {
+      dir.push(d);
+      storage.setItem(directory, dir);
+    });
+  }
 }

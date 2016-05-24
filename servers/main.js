@@ -33,15 +33,17 @@ app.get('/music', (req, res) => {
   var path =  req.query.params || 'all';
   res.json({
     meta: {
-      directory: 'anime',
-      allDirectories: ['all', 'anime', 'spain'],
+      directory: path,
+      allDirectories: ['all', 'anime'],
     },
     data: accessMusic.getDirectory(path),
   });
 
 });
 
-app.post('/upload', upload.single('test'), (req, res) => {
+app.post('/upload', upload.single('file'), (req, res) => {
+  let {directory} = req.body;
+  accessMusic.saveFile(directory, req.file.filename);
   accessMusic.getData(req.file.filename, (file) => res.json({data: file}));
 });
 

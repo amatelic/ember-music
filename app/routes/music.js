@@ -49,8 +49,10 @@ export default Ember.Route.extend({
     },
 
     fileLoaded(file) {
+      let dir = this.controllerFor('music').get('directory');
       let data = new FormData();
-      data.append('test', file);
+      data.append('directory', dir);
+      data.append('file', file);
       $.ajax({
         type: 'POST',
         url: 'http://localhost:5000/upload',
