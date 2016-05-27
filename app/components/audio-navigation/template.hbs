@@ -3,7 +3,7 @@
   <div class="playlist__folders">
     {{#if addNewFile}}
       <div class="playlist__add">
-        <input onkeyup={{action "addNewFolder" }} autofocus="true" type="text" name="name" placeholder="Playlist">
+        <input onkeyup={{action "addNewFolder" }} autofocus="true" class="playlist__input" type="text" name="name" placeholder="Playlist">
       </div>
     {{/if}}
     <ul class="playlist__list">
