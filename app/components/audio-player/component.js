@@ -1,6 +1,10 @@
 import Ember from 'ember';
+import { EKMixin } from 'ember-keyboard';
+import { keyUp, keyDown } from 'ember-keyboard';
+import $ from 'jquery';
+
 //https://teamgaslight.com/blog/a-beginners-guide-to-the-ember-run-loop
-export default Ember.Component.extend({
+export default Ember.Component.extend(EKMixin, {
   classNames: ['video__player'],
   playlist: [],
   repeatIsActive: false,
@@ -24,6 +28,13 @@ export default Ember.Component.extend({
 
     this.set('newTrack', null);
   }),
+
+  //Keyboard events
+  nKeyword: Ember.on(keyUp('n'), function() {this.send('changeTruck', 1);}),
+
+  pKeyword: Ember.on(keyUp('p'), function() {this.send('changeTruck', -1);}),
+
+  sKeyword: Ember.on(keyUp('s'), function() {this.playingTrack();}),
 
   actions: {
     toggleTrack() {
@@ -58,24 +69,14 @@ export default Ember.Component.extend({
      * @TODO find a way how to not distrby the avdio
      */
     setPosition() {
-      // this.togglePlayer();
-      // var time = parseFloat(this.$('.player_range').val());
-      // this.set('audio.currentTime', time);
-      // console.log(this.get('audio.currentTime'));
-      // this.set('currentTime', time);
-      // this.togglePlayer();
+      this.playingTrack();
+      var time = parseFloat(this.$('.player_range').val());
+      this.set('audio.currentTime', time);
+      this.set('currentTime', time);
+      Ember.run.next((d) => {
+        this.playingTrack();
+      });
     },
-  },
-  init() {
-    this._super(...arguments);
-    const track = this.getTrackName();
-    this.set('audio', new Audio(track.get('path')));
-    // this.set('audio.volume', 0); // remove
-    this.get('audio').ontimeupdate = () => {
-      if (this.get('toggle')) {
-        this.set('currentTime', this.get('audio').currentTime);
-      }
-    };
   },
 
   /**
@@ -111,12 +112,28 @@ export default Ember.Component.extend({
   playingTrack() {
     this.toggleProperty('toggle');
     if (this.get('toggle')) {
-      this.get('audio').play();
+      Ember.run.next((d) => {
+        this.get('audio').play();
+      });
     } else {
-      this.get('audio').pause();
+      Ember.run.next((d) => {
+        this.get('audio').pause();
+      });
     }
 
     this.set('duration', this.get('audio').duration);
   },
 
+  init() {
+    this._super(...arguments);
+    const track = this.getTrackName();
+    this.set('audio', new Audio(track.get('path')));
+    
+    // this.set('audio.volume', 0); // remove
+    this.get('audio').ontimeupdate = () => {
+      if (this.get('toggle')) {
+        this.set('currentTime', this.get('audio').currentTime);
+      }
+    };
+  }
 });

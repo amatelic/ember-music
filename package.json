@@ -43,8 +43,10 @@
     "ember-export-application-global": "^1.0.4",
     "ember-font-awesome": "2.1.0",
     "ember-json-api": "^0.6.0",
+    "ember-keyboard": "1.1.0",
     "ember-load-initializers": "^0.5.0",
     "ember-moment": "6.1.0",
+    "ember-mousetrap": "0.3.1",
     "ember-resolver": "^2.0.3",
     "loader.js": "^4.0.0"
   },

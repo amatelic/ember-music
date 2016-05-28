@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import  App from '../app';
+import  App from '../app'; //Need to make global variable for json meta data
 import $ from 'jquery';
 export default Ember.Route.extend({
   model() {

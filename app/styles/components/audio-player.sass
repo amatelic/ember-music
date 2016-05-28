@@ -19,6 +19,7 @@
 
 .step__button
   display: flex
+  cursor: pointer
   align-items: center
   font-size: 1.5em
 
@@ -27,6 +28,7 @@
   width: 35px
   height: 35px
   display: flex
+  cursor: pointer
   justify-content: center
   align-items: center
   color: $audio__player__basic
@@ -74,16 +76,21 @@
   width: 80%
 
 .duration__time__range > input[type=range]
+    outline: none
     width: 100%
     height: 5px
     margin-bottom: 5px
     background: green
+    cursor: pointer
     -webkit-appearance: none
 
 .volume__range
   display: flex
-  justify-content: center
   margin: 7px
+  justify-content: center
+
+.volume__range > input
+  cursor: pointer
 
 
 .is--Active
