@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import { EKMixin } from 'ember-keyboard';
-import { keyUp, keyDown } from 'ember-keyboard';
-import $ from 'jquery';
+import { keyUp} from 'ember-keyboard';
 
 //https://teamgaslight.com/blog/a-beginners-guide-to-the-ember-run-loop
 export default Ember.Component.extend(EKMixin, {
@@ -30,11 +29,11 @@ export default Ember.Component.extend(EKMixin, {
   }),
 
   //Keyboard events
-  nKeyword: Ember.on(keyUp('n'), function() {this.send('changeTruck', 1);}),
+  nKeyword: Ember.on(keyUp('ctrl+n'), function() {this.send('changeTruck', 1);}),
 
-  pKeyword: Ember.on(keyUp('p'), function() {this.send('changeTruck', -1);}),
+  pKeyword: Ember.on(keyUp('ctrl+p'), function() {this.send('changeTruck', -1);}),
 
-  sKeyword: Ember.on(keyUp('s'), function() {this.playingTrack();}),
+  sKeyword: Ember.on(keyUp('ctrl+s'), function() {this.playingTrack();}),
 
   actions: {
     toggleTrack() {
@@ -73,7 +72,7 @@ export default Ember.Component.extend(EKMixin, {
       var time = parseFloat(this.$('.player_range').val());
       this.set('audio.currentTime', time);
       this.set('currentTime', time);
-      Ember.run.next((d) => {
+      Ember.run.next(() => {
         this.playingTrack();
       });
     },
@@ -112,11 +111,11 @@ export default Ember.Component.extend(EKMixin, {
   playingTrack() {
     this.toggleProperty('toggle');
     if (this.get('toggle')) {
-      Ember.run.next((d) => {
+      Ember.run.next(() => {
         this.get('audio').play();
       });
     } else {
-      Ember.run.next((d) => {
+      Ember.run.next(() => {
         this.get('audio').pause();
       });
     }
@@ -128,7 +127,7 @@ export default Ember.Component.extend(EKMixin, {
     this._super(...arguments);
     const track = this.getTrackName();
     this.set('audio', new Audio(track.get('path')));
-    
+
     // this.set('audio.volume', 0); // remove
     this.get('audio').ontimeupdate = () => {
       if (this.get('toggle')) {

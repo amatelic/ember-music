@@ -9,7 +9,7 @@ export default Ember.Route.extend({
      });
   },
 
-  fileLoaded(e) {
+  fileLoaded() {
      this.controllerFor('music').set('removePreview', true);
      this.controllerFor('music').set('errors', false);
    },
@@ -26,8 +26,8 @@ export default Ember.Route.extend({
     filterTracks(query) {
       var expresion = new RegExp(query);
       this.controllerFor('music').set('tracks', this.store.filter('music', d => {
-        return expresion.test(d.get('name')) || expresion.test(d.get('album'))
-        || expresion.test(d.get('artist'));
+        return expresion.test(d.get('name')) || expresion.test(d.get('album')) ||
+        expresion.test(d.get('artist'));
       }));
     },
 
