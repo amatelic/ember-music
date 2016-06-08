@@ -1,5 +1,5 @@
 .audio__playlist
-  width: 85%
+  width: 100%
   height: 100%
   background:   $playlist_background
   color: $audio__player__text__color
@@ -45,7 +45,22 @@
 .active__track
   background: $audio__player__active
 
+.file-picker
+  width: 90%
+
 .audio__playlist__controls
-  width: 100%
-  height: 20%
+  margin-top: 10px
   display: flex
+  align-items: center
+  flex-direction: column
+
+
+.isMobile
+  display: none
+@media (min-width: 800px)
+  .isMobile
+    display: flex
+
+  .audio__playlist__controls
+    display: flex
+    flex-direction: row

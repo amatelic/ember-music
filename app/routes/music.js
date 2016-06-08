@@ -20,6 +20,7 @@ export default Ember.Route.extend({
     controller.set('tracks', model.tracks);
     controller.set('directory', App.storeMeta.music.directory);
     controller.set('directories', App.storeMeta.music.allDirectories);
+    controller.set('isLoading', false);
   },
 
   actions: {
@@ -32,6 +33,7 @@ export default Ember.Route.extend({
     },
 
     createFolder(name) {
+      this.controllerFor('music').set('isLoading', true);
       Ember.$.ajax({
         type: 'POST',
         url: 'http://localhost:5000/new_folder',
@@ -39,6 +41,7 @@ export default Ember.Route.extend({
           name: name,
         },
         success: (res) => {
+          this.controllerFor('music').set('isLoading', false);
           this.controllerFor('music').get('directories').addObject(res.dir);
         },
       });
@@ -49,6 +52,7 @@ export default Ember.Route.extend({
     },
 
     fileLoaded(file) {
+      this.controllerFor('music').set('isLoading', true);
       let dir = this.controllerFor('music').get('directory');
       let data = new FormData();
       data.append('directory', dir);
@@ -62,12 +66,10 @@ export default Ember.Route.extend({
         data: data,
         async: true,
         success: res => {
+          this.controllerFor('music').set('isLoading', false);
           this.store.createRecord('music', res.data.attributes);
         },
-
-        error: (d) => {
-          console.error(d);
-        },
+        error: (d) => this.controllerFor('music').set('isLoading', false),
 
       });
       return false;

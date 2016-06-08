@@ -23,3 +23,8 @@
     keyboardActivated=true
     }}
 {{outlet}}
+
+{{#if isLoading}}
+  {{ember-spinner config='standard'}}
+  <div class="black"></div>
+{{/if}}

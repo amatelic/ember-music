@@ -6,5 +6,5 @@ export default JSONAPIAdapter.extend({
   defaultSerializer: '-default',
   pathForType: function(type) {
     return Ember.String.underscore(type);
-  }
+  },
 });

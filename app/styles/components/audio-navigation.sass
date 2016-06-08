@@ -3,6 +3,7 @@
   height: 100%
   color: $audio__player__basic
   background: $audio__player__active
+  display: none
 .playlist__input
   width: 80%
 .playlist__directory
@@ -32,7 +33,7 @@
   position: absolute
   cursor: pointer
   display: flex
-  width: 15%
+  width: 13%
   padding: 5px 0
   border-top: 2px solid white
   border-bottom: 2px solid white
@@ -47,8 +48,11 @@
   border: 2px solid white
   align-items: center
   justify-content: center
-
 .playlist__text
   margin: 10px 0 0 10px
 .urgent
   display: flex
+
+@media (min-width: 750px)
+  .audio__navigation
+    display: block
