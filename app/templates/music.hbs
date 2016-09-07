@@ -1,7 +1,4 @@
 <div class="audio__playlist__controls">
-  {{#file-picker dropzone=true preview=false fileLoaded="fileLoaded"}}
-    Drag track
-  {{/file-picker}}
   {{track-filter filterTracks="filterTracks"}}
   <button {{action 'logOut' }} type="button" class="log-out" name="button">Log out</button>
 </div>
@@ -14,16 +11,18 @@
   }}
 
   <div class="audio__playlist">
-
-    {{audio-playlist changeTrack="changeTrack" playlist=tracks playing=model.playing}}
+    {{#file-picker selectOnClick=false dropzone=true preview=false fileLoaded="fileLoaded"}}
+      {{audio-playlist changeTrack="changeTrack" playlist=tracks playing=model.playing}}
+    {{/file-picker}}
   </div>
 </main>
-{{audio-player
+  {{audio-player
     newTrack=newTrack
     playlist=all-tracks
     playing=model.playing
     keyboardActivated=true
-    }}
+  }}
+
 {{outlet}}
 
 {{#if isLoading}}

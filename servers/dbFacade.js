@@ -65,17 +65,18 @@ function dataExist(table, obj, call1, call2){
   });
 }
 
-function getMusic(track, callback) {
+function getMusic(track, id, callback) {
   let path = `${__dirname}/musics`;
   fs.readFile(`${path}/${track}`, (err, file) => {
     var metadata = audioMetaData.id3v2(file);
 
     var obj = {
+      id: id,
       title: metadata.title  || 'undefined',
       artist: metadata.artist || 'undefined',
       album: metadata.album || 'undefined',
       path: 'http://localhost:5000/musics/' + track,
-      date: moment().format('DD/MM/YYYY')
+      date: moment().toISOString(),
     };
     callback(obj);
   })

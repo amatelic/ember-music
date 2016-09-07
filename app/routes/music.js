@@ -65,9 +65,11 @@ export default Ember.Route.extend({
     fileLoaded(file) {
       this.controllerFor('music').set('isLoading', true);
       let dir = this.controllerFor('music').get('directory');
+      let length = this.store.peekAll('music').toArray().length;
       let data = new FormData();
       data.append('directory', dir);
       data.append('file', file);
+      data.append('id', length);
       $.ajax({
         type: 'POST',
         url: `${ENV.serverURl}/upload`,

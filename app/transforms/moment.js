@@ -6,6 +6,6 @@ export default Transform.extend({
   },
 
   deserialize: function(value) {
-    return moment(value, 'DD/MM/YYYY');
+    return moment(value);
   }
 });
