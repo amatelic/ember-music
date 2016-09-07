@@ -1,0 +1,21 @@
+<div class="card">
+  <div class="form-control">
+    <h1>Login:</h1>
+  </div>
+  <div class="form-control">
+    <label for="">Email:</label>
+    {{input type="input" name="name" value=email}}
+  </div>
+  <div class="form-control">
+    <label for="">Password:</label>
+    {{input type="password" name="name" value=password}}
+  </div>
+  <div class="form-control">
+      <a href="/register">Register</a>
+  </div>
+  <div class="form-control">
+      <button {{action 'loginUser'}} type="button" name="button">Log in</button>
+  </div>
+</div>
+
+{{outlet}}

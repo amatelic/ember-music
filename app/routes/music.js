@@ -1,7 +1,10 @@
 import Ember from 'ember';
 import  App from '../app'; //Need to make global variable for json meta data
 import $ from 'jquery';
+import ENV from '../config/environment';
+import { storageFor } from 'ember-local-storage';
 export default Ember.Route.extend({
+  storage: storageFor('user'),
   model() {
     return Ember.RSVP.hash({
        tracks: this.store.findAll('music'),
@@ -24,10 +27,15 @@ export default Ember.Route.extend({
   },
 
   actions: {
+
+    logOut() {
+      this.set('storage.user', undefined);
+      this.transitionTo('login');
+    },
     filterTracks(query) {
       var expresion = new RegExp(query);
       this.controllerFor('music').set('tracks', this.store.filter('music', d => {
-        return expresion.test(d.get('name')) || expresion.test(d.get('album')) ||
+        return expresion.test(d.get('title')) || expresion.test(d.get('album')) ||
         expresion.test(d.get('artist'));
       }));
     },
@@ -36,7 +44,10 @@ export default Ember.Route.extend({
       this.controllerFor('music').set('isLoading', true);
       Ember.$.ajax({
         type: 'POST',
-        url: 'http://localhost:5000/new_folder',
+        url: `${ENV.serverURl}/new_folder`,
+        headers: {
+          'Api-key': this.get('storage.user'),
+        },
         data: {
           name: name,
         },
@@ -59,7 +70,10 @@ export default Ember.Route.extend({
       data.append('file', file);
       $.ajax({
         type: 'POST',
-        url: 'http://localhost:5000/upload',
+        url: `${ENV.serverURl}/upload`,
+        headers: {
+          'Api-key': this.get('storage.user'),
+        },
         dataType: 'json',
         processData:false,
         contentType:false,

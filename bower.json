@@ -7,6 +7,8 @@
     "ember-qunit-notifications": "0.1.0",
     "font-awesome": "~4.5.0",
     "mousetrap": "^1.5.3",
-    "spin.js": "^2.3.2"
+    "spin.js": "^2.3.2",
+    "blob-polyfill": "^1.0.20150320",
+    "sweetalert": "~1.1.0"
   }
 }

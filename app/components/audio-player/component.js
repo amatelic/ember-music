@@ -12,7 +12,7 @@ export default Ember.Component.extend(EKMixin, {
   loop: false,
   toggle: false,
   currentTime: 0,
-  durration: 0,
+  duration: 0,
   volume: 100,
   /**
    * Observer for tracking if a track was changed in the playlist
@@ -98,9 +98,11 @@ export default Ember.Component.extend(EKMixin, {
   changeAudio(audio) {
     this.get('audio').pause();
     this.set('audio.src', audio);
-    this.get('audio').play();
-    this.set('toggle', true);
-    this.set('duration', this.get('audio').duration);
+    this.get('audio').addEventListener('canplaythrough', function() {
+      this.get('audio').play();
+      this.set('toggle', true);
+      this.set('duration', this.get('audio').duration);
+    }.bind(this), false);
 
   },
 
@@ -126,13 +128,13 @@ export default Ember.Component.extend(EKMixin, {
   init() {
     this._super(...arguments);
     const track = this.getTrackName();
-    this.set('audio', new Audio(track.get('path')));
-
+    this.set('audio', new Audio());
     // this.set('audio.volume', 0); // remove
     this.get('audio').ontimeupdate = () => {
       if (this.get('toggle')) {
         this.set('currentTime', this.get('audio').currentTime);
       }
     };
+
   }
 });

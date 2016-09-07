@@ -12,6 +12,7 @@ body{
   margin: 0;
   width: 100%;
   height: 100%;
+  color: white;
 }
 
 body > .ember-view {
@@ -19,15 +20,19 @@ body > .ember-view {
   height: 100%;
 }
 
-p,a,h1,h2,h3,h4,h5{
+p,a,h1,h2,h3,h4,h5 {
   font-family: $font-family;
+}
+
+input, button {
+  outline: none;
 }
 /*Playlist */
 main {
   position: relative;
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 83%;
 }
 
 .music-app{
@@ -37,10 +42,10 @@ main {
 
 .file-picker {
   display: flex;
-  width: 95%;
-  height: 100px;
+  width: 50%;
+  height: 50px;
   margin: 10px 0 10px 0;
-  background: $audio__player__active;
+  background: $playlist_background;
   text-align: center;
   align-items: center;
   justify-content: center;
@@ -51,11 +56,11 @@ main {
 
 //Scroll design
 ::-webkit-scrollbar {
-    width: 20px;
+    width: 10px;
 }
 ::-webkit-scrollbar-track {
     background-color: #eaeaea;
-    border-left: 1px solid #ccc;
+    background: $playlist_background;
 }
 ::-webkit-scrollbar-thumb {
     height: 100px;
@@ -72,4 +77,68 @@ main {
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.5);
+}
+
+/**
+ * Card component
+ */
+
+.card {
+  margin: 100px auto;
+  width: 50%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: $playlist_background;
+  font-family: $font-family;
+  color: white
+}
+.form-control {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+}
+
+.form-control input {
+  padding-left: 10px;
+}
+
+.card input {
+  width: 50%;
+  height: 30px;
+  border: none;
+  border-radius: 25px;
+  margin: 3px;
+}
+
+.card a{
+  color: white;
+  text-decoration: none;
+}
+
+.card button {
+  width: 50%;
+  height: 30px;
+  border: none;
+  border-radius: 25px;
+  background: $audio__player__active;
+  color: white;
+  margin: 5px;
+}
+
+.card button:hover {
+  background: $audio__player__active;
+}
+
+.log-out {
+  padding: 10px;
+  margin-right: 5px;
+  background: $audio__player__active;
+  border-radius: 15px;
+  color: white;
 }
