@@ -98,6 +98,7 @@ main {
   font-family: $font-family;
   color: white
 }
+
 .form-control {
   display: flex;
   width: 100%;
@@ -124,6 +125,23 @@ main {
   text-decoration: none;
 }
 
+.button-link {
+  width: 50px;
+  padding: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  font-size: 12px;
+  text-decoration: none;
+  border: 1px solid gray;
+  text-align: center;
+  background: $audio__player__active;
+  border-radius: 15px;
+  color: white;
+}
+.button-music {
+  text-decoration: none;
+}
+
 .card button {
   width: 50%;
   height: 30px;
@@ -141,6 +159,7 @@ main {
 .log-out {
   padding: 10px;
   margin-right: 5px;
+  border: 1px solid gray;
   background: $audio__player__active;
   border-radius: 15px;
   color: white;
@@ -177,4 +196,26 @@ main {
 .data-option > p {
   padding: 1px;
   margin: 2px;
+}
+.user-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.user-configuration {
+  margin-top: 50px;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: $playlist_background;
+}
+
+.user-configuration input {
+  width: 50%;
+  height: 30px;
+  border: none;
+  border-radius: 25px;
+  margin: 3px;
 }

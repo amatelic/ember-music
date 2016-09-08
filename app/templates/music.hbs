@@ -1,6 +1,7 @@
 <div class="audio__playlist__controls">
   {{track-filter filterTracks="filterTracks"}}
   {{#user-dropdown}}
+    {{#link-to "user" class="button-link"}} User {{/link-to}}
     <button {{action 'logOut' }} type="button" class="log-out" name="button">Log out</button>
   {{/user-dropdown}}
 </div>

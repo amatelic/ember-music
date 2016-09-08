@@ -1,0 +1,32 @@
+<div class="audio__playlist__controls">
+  {{track-filter filterTracks="filterTracks"}}
+  {{#link-to "music" class="button-music"}}<p class="button-link"> &lArr;</p>{{/link-to}}
+  {{#user-dropdown}}
+    {{#link-to "user" button-link class="button-link"}} User {{/link-to}}
+    <button {{action 'logOut' }} type="button" class="log-out" name="button">Log out</button>
+  {{/user-dropdown}}
+</div>
+<div class="user-layout">
+  <div class="user-configuration">
+    <div class="form-control">
+      <h1>User:</h1>
+    </div>
+    <div class="form-control">
+      <label for="">User:</label>
+      {{input type="input" name="name" value=model.user}}
+    </div>
+    <div class="form-control">
+      <label for="">Email:</label>
+      {{input type="input" name="name" value=model.email}}
+    </div>
+    <div class="form-control">
+      {{input type="file"}}
+    </div>
+    <div class="form-control">
+      <button type="button" name="button">Change</button>
+    </div>
+  </div>
+</div>
+
+
+{{outlet}}
