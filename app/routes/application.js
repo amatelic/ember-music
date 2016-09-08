@@ -15,4 +15,16 @@ export default Ember.Route.extend(BodyClassMixin, {
       this.transitionTo('music');
     }
   },
+  actions: {
+    showProperty(object, evt) {
+      // this.setupController
+      this.controllerFor('application').set('show', true);
+      this.controllerFor('application').set('data', object);
+      this.controllerFor('application').set('position', [evt.x, evt.y]);
+    },
+
+    hidePropery() {
+      this.controllerFor('application').set('show', false);
+    },
+  }
 });

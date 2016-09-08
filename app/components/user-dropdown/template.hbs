@@ -1,0 +1,12 @@
+<div class="user-data">
+  <p>Anze Matelic</p>
+  <div {{action 'toggleNavigation' on="mouseEnter"}} class="user-image">
+    <img src="https://myspace.com/common/images/user.png" alt="" />
+  </div>
+  </div>
+
+{{#unless isHidden}}
+<div class="user-dropdown">
+  {{yield}}
+</div>
+{{/unless}}

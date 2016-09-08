@@ -31,6 +31,10 @@ app.get('/', (req, res) => {
     res.json({test: 1})
 });
 
+app.delete('/music/:id', (req, res) => {
+    res.json({}, 204);
+});
+
 app.post('/user', (req, res) => {
   let {email, password} = req.body;
   let obj = req.body;

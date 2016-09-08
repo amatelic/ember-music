@@ -1,5 +1,10 @@
 <div class="ember-load-indicator">
-  CAN I HAS APP NOW?
+  <!-- CAN I HAS APP NOW? -->
 </div>
 {{ember-load-remover}}
 {{outlet}}
+
+
+{{#if show}}
+  {{data-option hidePropery="hidePropery" position=position data=data}}
+{{/if}}
