@@ -7,15 +7,16 @@ module.exports = function(environment) {
     environment: environment,
     baseURL: '/',
     locationType: 'auto',
-    contentSecurityPolicy: {
-      'default-src': ["'none'"],
-      'script-src':  ["'self'"],
-      'font-src':    ["'self' https://fonts.gstatic.com"],
-      'connect-src': ["'self' http://localhost:5000"],
-      'img-src':     ["'self'"],
-      'style-src':   ["'self'", "unsafe-inline", "unsafe-eval", "https://fonts.googleapis.com"],
-      'media-src':   ["'self' http://localhost:5000"],
-    },
+    contentSecurityPolicy: null,
+    // {
+    //   'default-src': ["'none'"],
+    //   'script-src':  ["'self'"],
+    //   'font-src':    ["'self' https://fonts.gstatic.com"],
+    //   'connect-src': ["'self' http://localhost:5000"],
+    //   'img-src':     ["'self'"],
+    //   'style-src':   ["'self'", "unsafe-inline", "unsafe-eval", "https://fonts.googleapis.com"],
+    //   'media-src':   ["'self' http://localhost:5000"],
+    // },
     serverURl: 'http://localhost:5000',
     EmberENV: {
       FEATURES: {

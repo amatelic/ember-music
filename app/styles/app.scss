@@ -88,7 +88,7 @@ main {
 
 .card {
   margin: 100px auto;
-  width: 50%;
+  width: 40%;
   height: auto;
   display: flex;
   justify-content: center;
@@ -96,7 +96,8 @@ main {
   flex-direction: column;
   background: $playlist_background;
   font-family: $font-family;
-  color: white
+  color: white;
+  padding-bottom: 50px;
 }
 
 .form-control {

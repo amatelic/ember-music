@@ -15,6 +15,12 @@ export default Ember.Component.extend({
     }.bind(this));
   },
   actions: {
+    download() {
+      this.sendAction('hidePropery');
+      var link = document.createElement("a");
+      link.href = this.get('data.path');
+      link.click();
+    },
     delete() {
       // /destroyRecord
       this.get('data').destroyRecord().then(function(d) {

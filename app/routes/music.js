@@ -5,10 +5,16 @@ import ENV from '../config/environment';
 import { storageFor } from 'ember-local-storage';
 export default Ember.Route.extend({
   storage: storageFor('user'),
+  ajax: Ember.inject.service(),
   model() {
     return Ember.RSVP.hash({
        tracks: this.store.findAll('music'),
        playing: 0,
+       user: this.get('ajax').request('http://localhost:5000/profile', {
+         data: {user: this.get('storage.user')}, method: 'GET',
+       }).then(d => {
+         console.log(d)
+         return d;})
      });
   },
 
