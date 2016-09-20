@@ -11,10 +11,7 @@ export default Ember.Route.extend({
        tracks: this.store.findAll('music'),
        playing: 0,
        user: this.get('ajax').request('http://localhost:5000/profile', {
-         data: {user: this.get('storage.user')}, method: 'GET',
-       }).then(d => {
-         console.log(d)
-         return d;})
+         data: {user: this.get('storage.user')}, method: 'GET'}),
      });
   },
 

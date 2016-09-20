@@ -2,7 +2,7 @@ import Ember from 'ember';
 import BodyClassMixin from 'ember-body-class/mixins/body-class';
 import { storageFor } from 'ember-local-storage';
 
-export default Ember.Route.extend(BodyClassMixin, {
+export default Ember.Route.extend({
   storage: storageFor('user'),
   redirect: function(a) {
     if (Ember.isEmpty(this.get('storage.user'))) {
@@ -12,6 +12,7 @@ export default Ember.Route.extend(BodyClassMixin, {
         this.transitionTo('login');
       }
     } else {
+      // console.log(1)
       this.transitionTo('music');
     }
   },

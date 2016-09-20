@@ -53,11 +53,16 @@ app.post('/user', (req, res) => {
     (user) => res.json(RS.dontExist()));
 });
 
+//pridobivanje podatkov uporabnika iz podatkovne baze ob GET
+//zahtevi na url http://localhost:5000/profile
 app.get('/profile', (req, res) => {
-  let email = req.query.user;
-  DB.dataExist('user', {email}, (d) => {
-    res.json(d);
-  });
+    //pridobivanje emaila ter passworda iz zahteve
+  let {user, password} = req.query;
+  //preverjanje, če uporabnik obstaja
+  DB.dataExist('user', {email: user},
+    (user) => res.json(user),
+    (user) => res.json(RS.dontExist())
+  );
 });
 
 
@@ -71,10 +76,19 @@ app.post('/profile', uploadUser.single('file'),(req, res) => {
   });
 });
 
+//registriranje novega vtičnika ki posluša POST
+//zahtevo na url http://localhost:5000/register
 app.post('/register', (req, res) => {
+  //pridobivanje zahteve aplikacije
   let {email, password} = req.body;
+  //preverjanje ali uporabnik obstaja
   DB.dataExist('user', {email},
+    //Če uporabnik obstaja se  izvede ta metoda,
+    //ki vrne odgovor uporabnik obstaja.
     (data) => {res.json(RS.exist())},
+    //V primeru, da uporabnik ne obstaja
+    //potem se izvede ta metoda, ki najprej uporabnika
+    //shrane, ter pošlje odgovor, da je vse vredu.
     (data) => {
       DB.insert('user', createUser(req.body),
       (err, result) => { res.json(RS.normal({email})); });
@@ -87,7 +101,6 @@ app.get('/music', (req, res) => {
   DB.first('user', {email}, user => {
     let allDirectories = user.directories.map(d => d.name);
     let data = user.directories.filter(d => d.name === path);
-
     res.json(Object.assign({
       meta: {
         directory: path,
