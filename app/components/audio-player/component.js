@@ -11,9 +11,15 @@ export default Ember.Component.extend(EKMixin, {
   audio: null,
   loop: false,
   toggle: false,
-  currentTime: 0,
-  duration: 0,
+  currentTime: Ember.computed('audio.currentTime', function() {
+    console.log(this.get('audio.currentTime'))
+    return this.get('audio.currentTime');
+  }),
+  duration: Ember.computed('audio.duration', function() {
+    return this.get('audio').duration;
+  }),
   volume: 100,
+
   /**
    * Observer for tracking if a track was changed in the playlist
    * (observer is called only from music route)
@@ -67,11 +73,12 @@ export default Ember.Component.extend(EKMixin, {
     /**
      * @TODO find a way how to not distrby the avdio
      */
-    setPosition() {
-      this.playingTrack();
+    onMouseDown() {
+      this.set('toggle', false);
+    },
+    onMouseUp() {
       var time = parseFloat(this.$('.player_range').val());
       this.set('audio.currentTime', time);
-      this.set('currentTime', time);
       Ember.run.next(() => {
         this.playingTrack();
       });
@@ -101,7 +108,6 @@ export default Ember.Component.extend(EKMixin, {
     this.get('audio').addEventListener('canplaythrough', function() {
       this.get('audio').play();
       this.set('toggle', true);
-      this.set('duration', this.get('audio').duration);
     }.bind(this), false);
 
   },
@@ -121,14 +127,19 @@ export default Ember.Component.extend(EKMixin, {
         this.get('audio').pause();
       });
     }
-
-    this.set('duration', this.get('audio').duration);
+    //Remove of bug dosen't fire
+    // this.set('duration', this.get('audio').duration);
   },
 
   init() {
     this._super(...arguments);
     const track = this.getTrackName();
     this.set('audio', new Audio());
+
+    if (track) {
+      this.set('audio.src', track.get('path'));
+    }
+
     // this.set('audio.volume', 0); // remove
     this.get('audio').ontimeupdate = () => {
       if (this.get('toggle')) {

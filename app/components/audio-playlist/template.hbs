@@ -9,7 +9,7 @@
     <div onclick={{action 'selectTrack' index}}
       oncontextmenu={{action 'showDialog' track target=this}}
       class="audio__playlist__item {{eq index playing 'active__track'}}"  >
-      <p>{{truncate-text track.title 20}}</p>
+      <p>{{truncate-text track.title 15}}</p>
       <p class="isMobile" >{{truncate-text track.artist 15}}</p>
       <p class="isMobile" >{{truncate-text track.album 15}}</p>
       <p class="isMobile" >{{moment-from-now track.date}}</p>

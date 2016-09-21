@@ -15,7 +15,7 @@
       <p>{{music-timer currentTime}}</p>
     </div>
     <div class="duration__time__range">
-      <input onclick={{action 'setPosition'}} type="range" class="player_range" min="0" max={{duration}} value="{{currentTime}}">
+      <input onmousedown={{action 'onMouseDown'}}  onmouseup={{action 'onMouseUp'}} type="range" class="player_range" min="0" max={{duration}} value="{{currentTime}}">
     </div>
   </div>
   <div {{action 'repeat'}} class="{{eq repeatIsActive 'is--Active'}} repeat__button">
