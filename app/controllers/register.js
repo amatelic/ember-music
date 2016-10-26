@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import $ from 'jquery';
+import swal from 'sweetalert';
 import { storageFor } from 'ember-local-storage';
 export default Ember.Controller.extend({
   storage: storageFor('user'),

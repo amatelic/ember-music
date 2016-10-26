@@ -6,7 +6,13 @@
   border-top: 2px solid $audio__player__border
   border-right: 2px solid $audio__player__border
   position: fixed
+  transform: translateX(-100%)
+  transition: all 1s ease
   top: 0
+
+
+.toggle-nav
+  transform: translateX(0)
 
 .playlist__input
   width: 80%
@@ -72,6 +78,21 @@
   flex-direction: row
   justify-content: flex-end
 
+.user-dropdown
+ position: absolute
+ top: 45px
+ right: 10px
+ z-index: 10
+ padding: 5px
+ display: flex
+ flex-direction: column
+ justify-content: center
+ align-items: center
+ border-radius: 15px
+ background: $playlist_background
+ border: 2px solid $audio__player__border
+ box-shadow: 10px 10px 3px -9px rgba(0,0,0,0.75)
+
 .user-image
   width: 40px
   height: 40px
@@ -87,4 +108,5 @@
     width: 15%
     height: 100%
     position: relative
+    transform: translateX(0)
     // display: block

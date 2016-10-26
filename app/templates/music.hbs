@@ -1,4 +1,5 @@
 <div class="audio__playlist__controls">
+  <p {{action 'showNavigation'}}class="hamburger">{{fa-icon "bars"}}</p>
   {{track-filter filterTracks="filterTracks"}}
   {{#user-dropdown user=model.user}}
     {{#link-to "user" class="button-link"}} User {{/link-to}}
@@ -11,6 +12,8 @@
     directories=directories
     createFolder="createFolder"
     changeDirectory="changeDirectory"
+    hideNavigation="hideNavigation"
+    toggleNav=showNavigation
   }}
 
   <div class="audio__playlist">

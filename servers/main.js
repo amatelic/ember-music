@@ -95,12 +95,18 @@ app.post('/register', (req, res) => {
     });
 });
 
+// Vtičnik za pridobivanje seznamov skladb in izbranega seznama
 app.get('/music', (req, res) => {
+  //pridobivanje uporabniških podatkov
   let email =  req.headers['api-key'];
   var path =  req.query.params || 'all';
+  //Pridobivanje podatkov uporabnika iz mongdodb baze
   DB.first('user', {email}, user => {
+    //pridobivanje vseh seznamov predvajanj povezani z uporabnikom
     let allDirectories = user.directories.map(d => d.name);
+    //pridobivanje vseh skladb pozevani z izbranem seznamom
     let data = user.directories.filter(d => d.name === path);
+    //vračanje podatkov nazaj v json obliki
     res.json(Object.assign({
       meta: {
         directory: path,
@@ -110,11 +116,17 @@ app.get('/music', (req, res) => {
   });
 });
 
+// Vtičnik za dodajanje novih skladb
 app.post('/upload', upload.single('file'), (req, res) => {
+  //Pridobivanje podatkov seznama za shranjevanje podatkov
+  //ter informacije o uporabniku
   let {directory, id} = req.body;
   let email = req.headers['api-key'];
   let trackName = req.file.filename;
+  //Metoda za pridobivanje meta podatkov o skladbi
   DB.getMusic(trackName, id, (data) => {
+    //Shranjevanje nove skladbe v izbrani
+    //seznam predvajanj
     DB.update('user', {
       email,
       'directories.name': `${directory}`
@@ -122,6 +134,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
       $push: {
         'directories.$.music':  data,
     }});
+    //vračanje podatkov v json obliki
     res.json(JSONAPI.serialize(data));
   });
 });

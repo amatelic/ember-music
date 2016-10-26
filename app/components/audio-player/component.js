@@ -11,12 +11,11 @@ export default Ember.Component.extend(EKMixin, {
   audio: null,
   loop: false,
   toggle: false,
-  currentTime: Ember.computed('audio.currentTime', function() {
-    console.log(this.get('audio.currentTime'))
+  currentTime: Ember.computed('audio.src', function() {
     return this.get('audio.currentTime');
   }),
   duration: Ember.computed('audio.duration', function() {
-    return this.get('audio').duration;
+    return this.get('audio.duration');
   }),
   volume: 100,
 
@@ -25,7 +24,7 @@ export default Ember.Component.extend(EKMixin, {
    * (observer is called only from music route)
    * this.get('newTrack') -> is ember audio object
    */
-  trackHasChanged: Ember.observer('newTrack', function() {
+  trackHasChanged: Ember.observer('playing', function() {
     let track = this.get('newTrack');
     if (track !== null) {
       this.changeAudio(track.get('path'));
@@ -62,6 +61,7 @@ export default Ember.Component.extend(EKMixin, {
      * @return none
      */
     changeTruck(position) {
+      console.log(1)
       let track = this.get('playing') + position;
       let len = this.get('playlist').toArray().length;
       track = track % len;
@@ -102,12 +102,15 @@ export default Ember.Component.extend(EKMixin, {
    * @return null
    */
 
-  changeAudio(audio) {
-    this.get('audio').pause();
-    this.set('audio.src', audio);
+  changeAudio(path) {
+    this.set('toggle', false);
+    let audio = this.get('audio');
+    audio.src = path;
+    this.get('audio').load();
+    this.set('toggle', true);
+
     this.get('audio').addEventListener('canplaythrough', function() {
       this.get('audio').play();
-      this.set('toggle', true);
     }.bind(this), false);
 
   },
@@ -127,8 +130,6 @@ export default Ember.Component.extend(EKMixin, {
         this.get('audio').pause();
       });
     }
-    //Remove of bug dosen't fire
-    // this.set('duration', this.get('audio').duration);
   },
 
   init() {
@@ -140,12 +141,23 @@ export default Ember.Component.extend(EKMixin, {
       this.set('audio.src', track.get('path'));
     }
 
-    // this.set('audio.volume', 0); // remove
+    this.set('audio.volume', 0.2); // remove
     this.get('audio').ontimeupdate = () => {
       if (this.get('toggle')) {
         this.set('currentTime', this.get('audio').currentTime);
       }
     };
 
+  },
+  /**
+   * Pausing audio player and removing audio track timer
+   * @method willDestroyElement
+   * @return {[undefined]}
+   */
+
+  willDestroyElement() {
+    this._super(...arguments);
+    this.get('audio').pause();
+    this.get('audio').ontimeupdate = undefined;
   }
 });

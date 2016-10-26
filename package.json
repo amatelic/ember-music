@@ -52,6 +52,7 @@
     "ember-moment": "6.1.0",
     "ember-mousetrap": "0.3.1",
     "ember-resolver": "^2.0.3",
+    "liquid-fire": "0.26.4",
     "loader.js": "^4.0.0"
   },
   "dependencies": {

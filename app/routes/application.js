@@ -1,10 +1,9 @@
 import Ember from 'ember';
-import BodyClassMixin from 'ember-body-class/mixins/body-class';
 import { storageFor } from 'ember-local-storage';
 
 export default Ember.Route.extend({
   storage: storageFor('user'),
-  redirect: function(a) {
+  redirect: function() {
     if (Ember.isEmpty(this.get('storage.user'))) {
       if (window.location.pathname === '/register') {
         this.transitionTo('register');
@@ -12,7 +11,6 @@ export default Ember.Route.extend({
         this.transitionTo('login');
       }
     } else {
-      // console.log(1)
       this.transitionTo('music');
     }
   },

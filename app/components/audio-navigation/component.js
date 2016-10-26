@@ -12,8 +12,13 @@ function hideContent(e) {
 
 export default Ember.Component.extend({
   addNewFile: false,
+  classNameBindings: ['toggleNav'],
+  toggleNav: false,
   classNames: ['audio__navigation'],
   actions: {
+    hideNavigation() {
+      this.sendAction('hideNavigation');
+    },
     addFolder() {
       if (!this.get('addNewFile')) {
         this.toggleProperty('addNewFile');

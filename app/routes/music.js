@@ -88,7 +88,7 @@ export default Ember.Route.extend({
           this.controllerFor('music').set('isLoading', false);
           this.store.createRecord('music', res.data.attributes);
         },
-        error: (d) => this.controllerFor('music').set('isLoading', false),
+        error: () => this.controllerFor('music').set('isLoading', false),
 
       });
       return false;

@@ -24,8 +24,8 @@ export default Ember.Route.extend({
       var request = new XMLHttpRequest();
       request.open("POST", "http://localhost:5000/profile");
       request.send(formData);
-      request.onload = function(oEvent) {
-      if (request.status == 200) {
+      request.onload = function() {
+      if (request.status === 200) {
         alert('success');
       } else {
         alert('fail');
