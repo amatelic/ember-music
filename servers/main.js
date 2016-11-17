@@ -49,7 +49,7 @@ app.post('/user', (req, res) => {
   let {email, password} = req.body;
   let obj = req.body;
   DB.dataExist('user', {email},
-    (user) => res.json(RS.normal(obj)),
+    (user) => res.json(RS.normal(user)),
     (user) => res.json(RS.dontExist()));
 });
 

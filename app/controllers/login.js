@@ -4,15 +4,31 @@ import { storageFor } from 'ember-local-storage';
 import swal from 'sweetalert';
 export default Ember.Controller.extend({
   storage: storageFor('user'),
+  email: "",
+  password: "",
+  isValidEmail: true,
+  isEmpty: true,
   actions: {
     loginUser() {
+      this.set('isValidEmail', true);
+      this.set('isEmpty', true);
       let obj = this.getProperties('email', 'password');
+      var re = /\S+@\S+\.\S+/;
+      if (!re.test(obj.email)) {
+        this.set('isValidEmail', false);
+        return;
+      }
+
+      if (obj.password === "") {
+        this.set('isEmpty', false);
+        return;
+      }
+
       $.ajax({
         type: "POST",
         url: "http://localhost:5000/user",
         data: obj,
         success: function(res) {
-          // console.log(this.get('storage.user'))
           if (res.status === 404) {
             swal('Oops...', res.error, "error");
           } else {

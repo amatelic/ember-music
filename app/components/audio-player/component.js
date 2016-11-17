@@ -24,9 +24,9 @@ export default Ember.Component.extend(EKMixin, {
    * (observer is called only from music route)
    * this.get('newTrack') -> is ember audio object
    */
-  trackHasChanged: Ember.observer('playing', function() {
-    let track = this.get('newTrack');
-    if (track !== null) {
+  trackHasChanged: Ember.observer('playing',  function() {
+    let track = this.get('playing');
+    if (track !== null && track !== undefined) {
       this.changeAudio(track.get('path'));
     }
 
@@ -61,14 +61,15 @@ export default Ember.Component.extend(EKMixin, {
      * @return none
      */
     changeTruck(position) {
-      console.log(1)
-      let track = this.get('playing') + position;
-      let len = this.get('playlist').toArray().length;
-      track = track % len;
-      track = (track < 0) ? len - 1 : track;
-      this.set('playing', track);
-      var newAudio = this.get('playlist').toArray()[track];
-      this.set('newTrack', newAudio); //Change track because observer fire after playing track
+      let playlist = this.get('playlist');
+      let size = playlist.get('length') - 1;
+      let index = playlist.indexOf(this.get('playing'));
+      index = index + position;
+      if (size >= index && index > -1)  {
+        let newTrack = playlist.objectAt(index);
+        this.set('playing', newTrack);
+        this.changeAudio(newTrack.get('path'))
+      }
     },
     /**
      * @TODO find a way how to not distrby the avdio
@@ -86,17 +87,6 @@ export default Ember.Component.extend(EKMixin, {
   },
 
   /**
-   * Gets the index of the track and return an ember music object
-   * @param null
-   * @return Ember Object[Musis]   -- basic data of file
-   */
-
-  getTrackName() {
-    const index = this.get('playing');
-    return (this.get('playlist').toArray()[index]);
-  },
-
-  /**
    * Resets and changes track for audio
    * @param String   --path to audio file
    * @return null
@@ -111,6 +101,7 @@ export default Ember.Component.extend(EKMixin, {
 
     this.get('audio').addEventListener('canplaythrough', function() {
       this.get('audio').play();
+      this.set('duration', audio.duration);
     }.bind(this), false);
 
   },
@@ -134,7 +125,7 @@ export default Ember.Component.extend(EKMixin, {
 
   init() {
     this._super(...arguments);
-    const track = this.getTrackName();
+    const track = this.get('playing');
     this.set('audio', new Audio());
 
     if (track) {

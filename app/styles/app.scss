@@ -25,16 +25,12 @@ p,a,h1,h2,h3,h4,h5 {
 }
 
 .hamburger {
+  width: 10%;
   padding-top: 5px;
-  margin-top: 0;
-  margin-left: 10px;
+  margin: 0 10px;
   display: block;
 }
-@media (min-width: 750px) {
-  .hamburger {
-    display: none;
-  }
-}
+
 
 input, button {
   outline: none;
@@ -44,7 +40,18 @@ main {
   position: relative;
   display: flex;
   width: 100%;
-  height: 83%;
+  height: 90%;
+}
+.liquid-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+}
+.liquid-child {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .music-app{
@@ -59,13 +66,6 @@ main {
   display: flex;
   width: 100%;
   height: 100%;
-  // margin: 10px 0 10px 0;
-  // background: $playlist_background;
-  // text-align: center;
-  // align-items: center;
-  // justify-content: center;
-  // font-family: $font-family;
-  // font-size: 1.4em;
 
 }
 
@@ -234,7 +234,28 @@ main {
   margin: 3px;
 }
 
-input {
+.button-back {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  margin: 4px 10px 10px 0;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid white;
+  color: white;
+  box-shadow: 0.5px 1px 3px #000;
+}
+
+.button-back:hover {
+  background: #46575f;
+}
+
+.button-back:active {
+  box-shadow: inset 0px 0px 2px #000;
+}
+
+input[type="input"] {
   box-shadow: inset 0.5px 1px 2px #000;
 }
 
@@ -249,4 +270,13 @@ input {
 
 .button:active {
   box-shadow: inset 0px 0px 2px #000;
+}
+
+@media (min-width: 750px) {
+  .hamburger {
+    display: none;
+  }
+  main {
+    height: 83%;
+  }
 }

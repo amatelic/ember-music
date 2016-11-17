@@ -1,7 +1,7 @@
 <div class="audio__playlist__controls">
+  <div {{action 'showNavigation'}} class="hamburger">{{fa-icon "bars"}}</div>
   {{track-filter filterTracks="filterTracks"}}
-  {{#link-to "music" class="button-music"}}<p class="button-link"> &lArr;</p>{{/link-to}}
-  {{#user-dropdown user=model}}
+  {{#user-dropdown user=model showBackButton=true}}
     {{#link-to "user" button-link class="button-link"}} User {{/link-to}}
     <button {{action 'logOut' }} type="button" class="log-out" name="button">Log out</button>
   {{/user-dropdown}}

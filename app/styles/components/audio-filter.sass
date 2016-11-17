@@ -1,5 +1,5 @@
 .audio__playlist__filter
-  width: 95%
+  width: 50%
   display: flex
   align-items: center
   input
@@ -16,16 +16,21 @@
 .audio__playlist__controls
   height: auto
   align-items: center
+  display: flex
+  flex-direction: row
+  flex-wrap: nowrap
   background: $audio__player__active
   border-bottom: $audio__player__border
 
-@media (min-width: 800px)
+@media (min-width: 700px)
   .audio__playlist__filter
-    width: 70%
+    width: 60%
     input
       margin-left: 10px
       width: 70%
       height: 35px
+  .audio__playlist__filter
+    width: 95%
   .audio__playlist__controls
     height: 10%
     display: flex

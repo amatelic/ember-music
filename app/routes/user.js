@@ -12,6 +12,11 @@ export default Ember.Route.extend({
   },
 
   actions: {
+    logOut() {
+      this.set('storage.user', undefined);
+      this.transitionTo('login');
+    },
+
     changeData() {
       let data = document.getElementById('files').files[0];
       var formData = new FormData();

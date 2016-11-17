@@ -1,5 +1,5 @@
 <div class="audio__playlist__controls">
-  <p {{action 'showNavigation'}}class="hamburger">{{fa-icon "bars"}}</p>
+  <div {{action 'showNavigation'}} class="hamburger">{{fa-icon "bars"}}</div>
   {{track-filter filterTracks="filterTracks"}}
   {{#user-dropdown user=model.user}}
     {{#link-to "user" class="button-link"}} User {{/link-to}}
@@ -22,18 +22,17 @@
       content=this dragStartAction='myStartAction' dragEndAction='myEndAction'}}
 
       {{audio-playlist
-        changeTrack="changeTrack"
         playlist=tracks
-        playing=model.playing
+        playing=playing
+        changeTrack="changeTrack"
         showProperty="showProperty"
       }}
     {{/file-picker}}
   </div>
 </main>
   {{audio-player
-    newTrack=newTrack
-    playlist=all-tracks
-    playing=model.playing
+    playlist=tracks
+    playing=playing
     keyboardActivated=true
   }}
 

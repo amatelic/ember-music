@@ -9,7 +9,7 @@ export default Ember.Route.extend({
   model() {
     return Ember.RSVP.hash({
        tracks: this.store.findAll('music'),
-       playing: 0,
+      //  playing: 0,
        user: this.get('ajax').request('http://localhost:5000/profile', {
          data: {user: this.get('storage.user')}, method: 'GET'}),
      });
@@ -22,8 +22,11 @@ export default Ember.Route.extend({
 
   setupController: function(controller, model) {
     this._super(controller, model);
-    controller.set('all-tracks', model.tracks);
+    let track = (model.tracks && model.tracks.objectAt(0))
+                        ? model.tracks.objectAt(0): null;
+                        
     controller.set('tracks', model.tracks);
+    controller.set('playing', track);
     controller.set('directory', App.storeMeta.music.directory);
     controller.set('directories', App.storeMeta.music.allDirectories);
     controller.set('isLoading', false);
@@ -34,13 +37,6 @@ export default Ember.Route.extend({
     logOut() {
       this.set('storage.user', undefined);
       this.transitionTo('login');
-    },
-    filterTracks(query) {
-      var expresion = new RegExp(query);
-      this.controllerFor('music').set('tracks', this.store.filter('music', d => {
-        return expresion.test(d.get('title')) || expresion.test(d.get('album')) ||
-        expresion.test(d.get('artist'));
-      }));
     },
 
     createFolder(name) {
@@ -59,10 +55,6 @@ export default Ember.Route.extend({
           this.controllerFor('music').get('directories').addObject(res.dir);
         },
       });
-    },
-
-    changeTrack(track) {
-      this.controllerFor('music').set('newTrack', track);
     },
 
     fileLoaded(file) {

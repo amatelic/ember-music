@@ -5,10 +5,16 @@
   <div class="form-control">
     <label for="">Email:</label>
     {{input type="input" name="name" value=email}}
+    {{#unless isValidEmail}}
+      <p>Input is not email address</p>
+    {{/unless}}
   </div>
   <div class="form-control">
     <label for="">Password:</label>
     {{input type="password" name="name" value=password}}
+    {{#unless isEmpty}}
+      <p>Input is empty</p>
+    {{/unless}}
   </div>
   <div class="form-control">
       <a href="/register">Register</a>

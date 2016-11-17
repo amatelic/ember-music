@@ -1,18 +1,18 @@
 <div class="audio__playlist__header">
-  <p>SONG</p>
-  <p class="isMobile">ARTIST</p>
-  <p class="isMobile">ALBUM</p>
-  <p class="isMobile">DATE</p>
+  <div class="container-25"><p>SONG</p></div>
+  <div class="container-25 isMobile"><p>ARTIST</p></div>
+  <div class="container-25 isMobile"><p>ALBUM</p></div>
+  <div class="container-25 isMobile"><p>DATE</p></div>
 </div>
 <div class="audio__playlist__body">
   {{#each playlist as |track index|}}
-    <div onclick={{action 'selectTrack' index}}
+    <div onclick={{action 'selectTrack' track index}}
       oncontextmenu={{action 'showDialog' track target=this}}
-      class="audio__playlist__item {{eq index playing 'active__track'}}"  >
-      <p>{{truncate-text track.title 15}}</p>
-      <p class="isMobile" >{{truncate-text track.artist 15}}</p>
-      <p class="isMobile" >{{truncate-text track.album 15}}</p>
-      <p class="isMobile" >{{moment-from-now track.date}}</p>
+      class="audio__playlist__item {{eq index isPlaying 'active__track'}}"  >
+      <div class="container-25"><p>{{truncate-text track.title 15}}</p></div>
+      <div class="container-25 isMobile" ><p>{{truncate-text track.artist 15}}</p></div>
+      <div class="container-25 isMobile" ><p>{{truncate-text track.album 15}}</p></div>
+      <div class="container-25 isMobile" ><p>{{moment-from-now track.date}}</p></div>
     </div>
   {{/each}}
 </div>

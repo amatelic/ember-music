@@ -1,9 +1,10 @@
-<div class="user-data">
-  <p>{{user.username}}</p>
-  <div {{action 'toggleNavigation' on="mouseEnter"}} class="user-image">
-    <img src="{{user.image}}" alt="" />
-  </div>
-  </div>
+{{#if showBackButton}}
+  {{#link-to "music" class="button-music"}}<p class="button-back"> &lArr;</p>{{/link-to}}
+{{/if}}
+<p>{{user.username}}</p>
+<div {{action 'toggleNavigation' on="mouseEnter"}} class="user-image">
+  <img src="{{user.image}}" alt="" />
+</div>
 
 {{#unless isHidden}}
 <div class="user-dropdown">
