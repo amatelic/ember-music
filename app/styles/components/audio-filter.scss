@@ -1,0 +1,76 @@
+.audio__playlist__controls {
+  height: auto;
+  padding: 0px 50px;
+  min-height: 50px;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  background: $secondary_color;
+  border-bottom: $audio__player__border;
+}
+
+.audio__playlist__filter input {
+  width: auto;
+  height: auto;
+  border: none;
+  min-width: 250px;
+  min-height: 30px;
+  background: $primary_color;
+  padding: 0px 15px;
+  color: white;
+  box-sizing: border-box;
+  border-radius: 45px;
+}
+
+.user-data {
+  width: 100px;
+  height: 40px;
+  display: flex;
+  position: relative;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.user-data * {
+  color: white;
+}
+
+
+.user-image img {
+  width: 40px;
+  height: 40px;
+  border: 2px solid white;
+  border-radius: 25px;
+  overflow: hidden;
+}
+
+.user-dropdown {
+  display: flex;
+  flex-direction: column;
+  max-width: 125px;
+  height: auto;
+  position: absolute;
+  bottom: -55px;
+  right: 0px;
+  background: $primary_color;
+  padding: 10px 15px;
+  border-radius: 15px;
+  z-index: 10;
+  color: white;
+
+  box-shadow: 1px 1px 2px 2px rgba(0, 0, 0, 0.7);
+}
+
+
+
+.user-dropdown a {
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+

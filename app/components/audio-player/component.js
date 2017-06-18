@@ -68,7 +68,7 @@ export default Ember.Component.extend(EKMixin, {
       if (size >= index && index > -1)  {
         let newTrack = playlist.objectAt(index);
         this.set('playing', newTrack);
-        this.changeAudio(newTrack.get('path'))
+        this.changeAudio(newTrack.get('path'));
       }
     },
     /**
@@ -130,12 +130,25 @@ export default Ember.Component.extend(EKMixin, {
 
     if (track) {
       this.set('audio.src', track.get('path'));
+      setTimeout(() => this.set('duration', this.get('audio.duration')), 500);
     }
 
     this.set('audio.volume', 0.2); // remove
+
+  },
+
+  didRender() {
+    const self= this;
+    const el = this.$('.player_range');
     this.get('audio').ontimeupdate = () => {
       if (this.get('toggle')) {
         this.set('currentTime', this.get('audio').currentTime);
+        var val = (el.val() - el.attr('min')) / (el.attr('max') - el.attr('min'));
+        el.css('background-image',
+                `-webkit-gradient(linear, left top, right top,
+                color-stop(${val}, #f09c84),
+                color-stop(${val}, #7e4554)
+                )`);
       }
     };
 

@@ -1,0 +1,61 @@
+.audio__playlist {
+  width: 100%;
+  padding: 10px 25px;
+  overflow-y: scroll;
+}
+
+.audio__playlist__main {
+  width: 100%;
+  height: 100%;
+}
+
+.audio__playlist__header,
+.audio__playlist__body {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  color: $primary_color;
+}
+
+
+.audio__playlist__body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  color: $primary_color;
+}
+
+.audio__playlist__header {
+  height: 35px;
+  flex-direction: row;
+  padding-bottom: 15px;
+  border-bottom: 1px solid $primary_color;
+}
+
+.audio__playlist__item {
+  display: flex;
+  flex-direction: row;
+}
+
+.active__track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.audio__playlist__header div,
+.audio__playlist__item div {
+  width: 25%;
+  padding: 0px 15px;
+  box-sizing: border-box;
+}
+
+.data-option {
+  position: absolute;
+  background: $primary_color;
+  border-radius: 15px;
+  padding: 5px 10px;
+}
+
+.data-option * {
+  cursor: pointer;
+}

@@ -2,11 +2,10 @@
   <div {{action 'showNavigation'}} class="hamburger">{{fa-icon "bars"}}</div>
   {{track-filter filterTracks="filterTracks"}}
   {{#user-dropdown user=model showBackButton=true}}
-    {{#link-to "user" button-link class="button-link"}} User {{/link-to}}
-    <button {{action 'logOut' }} type="button" class="log-out" name="button">Log out</button>
-  {{/user-dropdown}}
+    {{#link-to "user" }} User {{/link-to}}
+    <a {{action 'logOut' }} >Log out</a>  {{/user-dropdown}}
 </div>
-<div class="user-layout">
+<div class="user-layout card">
   <div class="user-configuration">
     <div class="form-control">
       <h1>User:</h1>
