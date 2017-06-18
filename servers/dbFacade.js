@@ -33,7 +33,10 @@ function first(table, obj, callback) {
     console.log("Start getting collection data");
     var database = db.collection(table);
     let userResolve = database.findOne(obj);
-    userResolve.then(callback);
+    userResolve.then((data)=> {
+      console.log(data);
+      return data;
+    }).then(callback);
     db.close();
   });
 }

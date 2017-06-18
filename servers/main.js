@@ -38,7 +38,7 @@ var uploadUser = multer({ storage: storage2});
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.get('/', (req, res) => {
-    res.json({test: 1})
+    res.json({message: 'Music app server is running'});
 });
 
 app.delete('/music/:id', (req, res) => {
@@ -48,7 +48,7 @@ app.delete('/music/:id', (req, res) => {
 app.post('/user', (req, res) => {
   let {email, password} = req.body;
   let obj = req.body;
-  DB.dataExist('user', {email},
+  DB.dataExist('user', {email, password},
     (user) => res.json(RS.normal(user)),
     (user) => res.json(RS.dontExist()));
 });
@@ -82,10 +82,10 @@ app.post('/register', (req, res) => {
   //pridobivanje zahteve aplikacije
   let {email, password} = req.body;
   //preverjanje ali uporabnik obstaja
-  DB.dataExist('user', {email},
+  DB.dataExist('user', {email, password},
     //Če uporabnik obstaja se  izvede ta metoda,
     //ki vrne odgovor uporabnik obstaja.
-    (data) => {res.json(RS.exist())},
+    (data) => res.json(RS.exist()),
     //V primeru, da uporabnik ne obstaja
     //potem se izvede ta metoda, ki najprej uporabnika
     //shrane, ter pošlje odgovor, da je vse vredu.
@@ -99,7 +99,7 @@ app.post('/register', (req, res) => {
 app.get('/music', (req, res) => {
   //pridobivanje uporabniških podatkov
   let email =  req.headers['api-key'];
-  var path =  req.query.params || 'all';
+  let path =  req.query.params || 'all';
   //Pridobivanje podatkov uporabnika iz mongdodb baze
   DB.first('user', {email}, user => {
     //pridobivanje vseh seznamov predvajanj povezani z uporabnikom
@@ -160,7 +160,7 @@ app.listen(port, () => {
 function createUser(data) {
   data.image = 'https://myspace.com/common/images/user.png';
   data.username = '';
-  data.directories = [];
+  data.directories = [{name: "all", music: []}];
   return data;
 }
 //end mongoDB

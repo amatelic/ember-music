@@ -24,7 +24,7 @@ export default Ember.Route.extend({
     this._super(controller, model);
     let track = (model.tracks && model.tracks.objectAt(0))
                         ? model.tracks.objectAt(0): null;
-                        
+    console.log(controller, model);
     controller.set('tracks', model.tracks);
     controller.set('playing', track);
     controller.set('directory', App.storeMeta.music.directory);
