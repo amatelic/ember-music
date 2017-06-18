@@ -2,17 +2,26 @@
   <div class="form-control">
     <h1>Register:</h1>
   </div>
+  {{#unless hasError.formIsEmpty}}
+    <span class="error-text">Form is missing some values.</span>
+  {{/unless}}
   <div class="form-control">
     <label for="">Email:</label>
     {{input type="input" name="name" value=email}}
+      {{#unless hasError.isEmail}}
+        <span class="error-text">Please provide email address.</span>
+      {{/unless}}
   </div>
   <div class="form-control">
     <label for="">Password:</label>
     {{input type="password" name="name" value=password}}
   </div>
   <div class="form-control">
-    <label for="">Re-assword:</label>
-    {{input type="repassword" name="name" value=repassword}}
+    <label for="">Re-password:</label>
+    {{input type="password" name="name" value=repassword}}
+    {{#unless hasError.isSamePassword}}
+      <span class="error-text">Password are not the same.</span>
+    {{/unless}}
   </div>
   <div class="form-control">
       <button {{action 'registerUser'}} type="button" class="button" name="button">Register</button>

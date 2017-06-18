@@ -6,18 +6,18 @@
     <label for="">Email:</label>
     {{input type="input" name="name" value=email}}
     {{#unless isValidEmail}}
-      <p>Input is not email address</p>
+      <span class="error-text">Input is not email address</span>
     {{/unless}}
   </div>
   <div class="form-control">
     <label for="">Password:</label>
     {{input type="password" name="name" value=password}}
     {{#unless isEmpty}}
-      <p>Input is empty</p>
+      <span class="error-text">Input is empty</span>
     {{/unless}}
   </div>
   <div class="form-control">
-      <a href="/register">Register</a>
+      <small>Or create account: <a href="/register">Register</a></small>
   </div>
   <div class="form-control">
       <button {{action 'loginUser'}} type="button" class="button" name="button">Log in</button>

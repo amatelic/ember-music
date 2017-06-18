@@ -4,6 +4,7 @@
 @import 'components/audio-player';
 @import 'components/audio-filter';
 @import 'components/audio-navigation';
+@import 'default/helpers';
 
 html,
 body{
@@ -13,6 +14,7 @@ body{
   width: 100%;
   height: 100%;
   color: white;
+  background: radial-gradient(ellipse at center, rgba(238,238,238,1) 0%, rgba(205,197,194,1) 86%, rgba(205,197,194,1) 100%);
 }
 
 body > .ember-view {
@@ -100,16 +102,18 @@ main {
 
 .card {
   margin: 100px auto;
-  width: 40%;
+  width: 450px;
   height: auto;
+  min-height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: $playlist_background;
+  background: $background-login;
   font-family: $font-family;
-  color: white;
+  color: rgba(0, 0, 0 , 0.5);
   padding-bottom: 50px;
+  box-shadow: 0px 0px 2px 2px rgba(0, 0, 0, 0.2);
 }
 
 .form-control {
@@ -129,12 +133,12 @@ main {
   width: 50%;
   height: 30px;
   border: none;
-  border-radius: 25px;
   margin: 3px;
+  border-bottom: 1px solid rgba(0, 0, 0 , 0.5)
 }
 
 .card a{
-  color: white;
+  color: gray;
   text-decoration: none;
 }
 
@@ -156,121 +160,124 @@ main {
 }
 
 .card button {
-  width: 50%;
-  height: 30px;
-  border: none;
+  width: auto;
+  min-width: 130px;
+  height: 100%;
+  min-height: 35px;
   border-radius: 25px;
-  background: $audio__player__active;
+  border:  none;
+  // background: linear-gradient(to left top,rgba(254,235,171,1) 0%, rgba(220,137,121,1) 51%, rgba(126,69,84,1) 100%);
+  background: linear-gradient(to left top,rgba(220,137,121,1) 0%, rgba(126,69,84,1) 100%);
   color: white;
   margin: 5px;
+  cursor: pointer;
 }
 
-.card button:hover {
-  background: $audio__player__active;
+.card button:active {
+  box-shadow: inset 0px 0px 4px 2px rgba(0,0,0, 0.5);
 }
 
-.log-out {
-  padding: 10px;
-  margin-right: 5px;
-  border: 1px solid gray;
-  background: $audio__player__active;
-  border-radius: 15px;
-  color: white;
-}
 
-.data-option {
-  background: $audio__player__active;
-  padding: 2px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  z-index: 9999;
-  border: 1px solid $audio__player__border;
-  box-shadow: 0px 0px 5px  rgba(0,0,0,0.75);
-  transition: transform 1s ease;
-}
+// .log-out {
+//   padding: 10px;
+//   margin-right: 5px;
+//   border: 1px solid gray;
+//   background: $audio__player__active;
+//   border-radius: 15px;
+//   color: white;
+// }
 
-.data-option > div {
-  width: 100%;
-  height: 25px;
-}
+// .data-option {
+//   background: $audio__player__active;
+//   padding: 2px;
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   z-index: 9999;
+//   border: 1px solid $audio__player__border;
+//   box-shadow: 0px 0px 5px  rgba(0,0,0,0.75);
+//   transition: transform 1s ease;
+// }
 
-.data-option > div > p {
-  margin: 2px
-}
-.data-option > div:hover {
-  background: $playlist_background;
-}
+// .data-option > div {
+//   width: 100%;
+//   height: 25px;
+// }
 
-.data-option > div:active {
-  background: $playlist_background;
-  box-shadow: inset 0px 0px 23px 7px rgba(0,0,0,0.75);
-}
+// .data-option > div > p {
+//   margin: 2px
+// }
+// .data-option > div:hover {
+//   background: $playlist_background;
+// }
 
-.data-option > p {
-  padding: 1px;
-  margin: 2px;
-}
-.user-layout {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-.user-configuration {
-  margin-top: 50px;
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: $playlist_background;
-}
+// .data-option > div:active {
+//   background: $playlist_background;
+//   box-shadow: inset 0px 0px 23px 7px rgba(0,0,0,0.75);
+// }
 
-.user-configuration input {
-  width: 50%;
-  height: 30px;
-  border: none;
-  border-radius: 25px;
-  margin: 3px;
-}
+// .data-option > p {
+//   padding: 1px;
+//   margin: 2px;
+// }
+// .user-layout {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   align-items: center;
+// }
 
-.button-back {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  display: flex;
-  margin: 4px 10px 10px 0;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid white;
-  color: white;
-  box-shadow: 0.5px 1px 3px #000;
-}
+// .user-configuration {
+//   margin-top: 50px;
+//   width: 60%;
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: center;
+//   background: $playlist_background;
+// }
 
-.button-back:hover {
-  background: #46575f;
-}
+// .user-configuration input {
+//   width: 50%;
+//   height: 30px;
+//   border: none;
+//   border-radius: 25px;
+//   margin: 3px;
+// }
 
-.button-back:active {
-  box-shadow: inset 0px 0px 2px #000;
-}
+// .button-back {
+//   width: 40px;
+//   height: 40px;
+//   border-radius: 50%;
+//   display: flex;
+//   margin: 4px 10px 10px 0;
+//   justify-content: center;
+//   align-items: center;
+//   border: 2px solid white;
+//   color: white;
+//   box-shadow: 0.5px 1px 3px #000;
+// }
 
-input[type="input"] {
-  box-shadow: inset 0.5px 1px 2px #000;
-}
+// .button-back:hover {
+//   background: #46575f;
+// }
 
-.button {
-  background: #46575f;
-  box-shadow: 0.5px 1px 1px #000;
-}
+// .button-back:active {
+//   box-shadow: inset 0px 0px 2px #000;
+// }
 
-.button:hover {
-  background: #46575f;
-}
 
-.button:active {
-  box-shadow: inset 0px 0px 2px #000;
-}
+// .button {
+//   background: #46575f;
+//   box-shadow: 0.5px 1px 1px #000;
+// }
+
+// .button:hover {
+//   background: #46575f;
+// }
+
+// .button:active {
+//   box-shadow: inset 0px 0px 2px #000;
+// }
 
 @media (min-width: 750px) {
   .hamburger {
