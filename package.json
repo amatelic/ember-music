@@ -58,6 +58,7 @@
   },
   "dependencies": {
     "audio-metadata": "^0.3.0",
+    "bcrypt": "^1.0.2",
     "body-parser": "^1.15.1",
     "cors": "^2.7.1",
     "ember-cli-sass": "^5.3.1",

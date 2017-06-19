@@ -10,7 +10,7 @@ export default Ember.Route.extend({
     return Ember.RSVP.hash({
        tracks: this.store.findAll('music'),
       //  playing: 0,
-       user: this.get('ajax').request('http://localhost:5000/profile', {
+       user: this.get('ajax').request(`${ENV.serverURl}/user/profile`, {
          data: {user: this.get('storage.user')}, method: 'GET'}),
      });
   },

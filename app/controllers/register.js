@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import $ from 'jquery';
 import swal from 'sweetalert';
+import ENV from '../config/environment';
 import { storageFor } from 'ember-local-storage';
 import _ from 'lodash';
 
@@ -19,19 +20,16 @@ export default Ember.Controller.extend({
         return;
       }
 
-      console.log('Send');
-      return;
-
       $.ajax({
         type: "POST",
-        url: "http://localhost:5000/register",
+        url: `${ENV.serverURl}/user/register`,
         data: values,
         success: function(res) {
           if (res.status === 404) {
             swal('Oops...', res.error, "error");
           } else {
-            this.set('storage.user', res.email);
-            this.transitionToRoute('music');
+            // this.set('storage.user', res.email);
+            // this.transitionToRoute('music');
           }
         }.bind(this),
       });
