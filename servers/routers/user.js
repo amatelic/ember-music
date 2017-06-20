@@ -1,5 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
 const User = require('../service/user-service');
 const Response = require('../service/response-service');
 const USER_RESPONSES = require('../response-metadata/user');
@@ -7,7 +6,12 @@ const USER_RESPONSES = require('../response-metadata/user');
 const router = express.Router();
 
 router.get('/profile', function(req, res) {
-  res.send('im the home page!');
+  const apiKey = req.query['api-key'];
+  User.getByApiKey(apiKey)
+    .then(user => {
+      res.json(user);
+    });
+  // TODO work on errors;
 });
 
 router.post('/', function(req, res) {
@@ -15,8 +19,7 @@ router.post('/', function(req, res) {
   User.login(email, password)
     .then(([isCorrect, user]) => {
       if(isCorrect) {
-        delete user.password;
-        res.json(Response.ok(user));
+        res.json(Response.ok({apiKey: user.apiKey}));
       } else {
         res.json(Response._404(USER_RESPONSES.LOGIN_ERROR));
       }
@@ -30,16 +33,10 @@ router.post('/register', function(req, res) {
 
   User.userExist(email)
     .then(user => {
-      if(user) {
-        res.json(Response._404(USER_RESPONSES.USER_ALREADY_EXSISTS), 404);
-      } else {
-        return User.create(User.userDataStructure(email, password))
-                .then(db => {
-                  const user = db.ops[0];
-                  delete user.password;
-                  res.json(Response.ok(user));
-                });
-      }
+      return (user)
+        ? res.json(Response._404(USER_RESPONSES.USER_ALREADY_EXSISTS), 404)
+        : User.create(User.userDataStructure(email, password))
+            .then(db => res.json(Response.ok({ apiKey: db.ops[0].apiKey})));
     })
     .catch(d => console.log('err', d));
   //preverjanje ali uporabnik obstaja

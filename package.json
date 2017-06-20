@@ -57,6 +57,7 @@
     "loader.js": "^4.0.0"
   },
   "dependencies": {
+    "apikeygen": "^0.2.0",
     "audio-metadata": "^0.3.0",
     "bcrypt": "^1.0.2",
     "body-parser": "^1.15.1",

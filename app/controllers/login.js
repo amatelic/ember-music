@@ -32,7 +32,7 @@ export default Ember.Controller.extend({
           if (res.status === 404) {
             swal('Oops...', res.error, "error");
           } else {
-            this.set('storage.user', res.email);
+            this.set('storage.apiKey', res.data.apiKey);
             this.transitionToRoute('music');
           }
         }.bind(this),

@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const Music = require('./service/music-service');
-const Response = require('./service/user-service');
+const Audio = require('../service/audio-service');
+const User = require('../service/user-service');
+const Response = require('../service/user-service');
 var JSONAPISerializer = require('jsonapi-serializer').Serializer;
 
 // JSONAPI serializer
@@ -13,9 +14,27 @@ const JSONAPI = new JSONAPISerializer('music',{
 
 var router = express.Router();
 
-
-router.get('/test', function(req, res) {
-    res.send('im the home page!');
+router.get('/', function(req, res) {
+  let apiKey =  req.headers['api-key'];
+  let selected =  req.query.params || 'all';
+  User.getByApiKey(apiKey)
+    .then(user => {
+      res.json(Audio.directorys(user.directories, selected));
+    });
+  //Pridobivanje podatkov uporabnika iz mongdodb baze
+  // DB.first('user', {email}, user => {
+    //pridobivanje vseh seznamov predvajanj povezani z uporabnikom
+    // let allDirectories = user.directories.map(d => d.name);
+    //pridobivanje vseh skladb pozevani z izbranem seznamom
+    // let data = user.directories.filter(d => d.name === path);
+    //vračanje podatkov nazaj v json obliki
+    // res.json(Object.assign({
+    //   meta: {
+    //     directory: path,
+    //     allDirectories: allDirectories,
+    //   },
+    // }, JSONAPI.serialize(data[0].music)));
+  // });
 });
 
 // router.post('/new_folder', (req, res) => {
@@ -34,22 +53,22 @@ router.get('/test', function(req, res) {
 // Vtičnik za pridobivanje seznamov skladb in izbranega seznama
 // router.get('/music', (req, res) => {
 //   //pridobivanje uporabniških podatkov
-//   let email =  req.headers['api-key'];
-//   let path =  req.query.params || 'all';
-//   //Pridobivanje podatkov uporabnika iz mongdodb baze
-//   DB.first('user', {email}, user => {
-//     //pridobivanje vseh seznamov predvajanj povezani z uporabnikom
-//     let allDirectories = user.directories.map(d => d.name);
-//     //pridobivanje vseh skladb pozevani z izbranem seznamom
-//     let data = user.directories.filter(d => d.name === path);
-//     //vračanje podatkov nazaj v json obliki
-//     res.json(Object.assign({
-//       meta: {
-//         directory: path,
-//         allDirectories: allDirectories,
-//       },
-//     }, JSONAPI.serialize(data[0].music)));
-//   });
+  // let email =  req.headers['api-key'];
+  // let path =  req.query.params || 'all';
+  //Pridobivanje podatkov uporabnika iz mongdodb baze
+  // DB.first('user', {email}, user => {
+    //pridobivanje vseh seznamov predvajanj povezani z uporabnikom
+    // let allDirectories = user.directories.map(d => d.name);
+    //pridobivanje vseh skladb pozevani z izbranem seznamom
+    // let data = user.directories.filter(d => d.name === path);
+    //vračanje podatkov nazaj v json obliki
+  //   res.json(Object.assign({
+  //     meta: {
+  //       directory: path,
+  //       allDirectories: allDirectories,
+  //     },
+  //   }, JSONAPI.serialize(data[0].music)));
+  // });
 // });
 
 // Vtičnik za dodajanje novih skladb
@@ -76,4 +95,4 @@ router.get('/test', function(req, res) {
 // });
 
 
-exports.module = router;
+module.exports = router;

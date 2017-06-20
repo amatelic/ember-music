@@ -8,10 +8,13 @@ export default Ember.Route.extend({
   ajax: Ember.inject.service(),
   model() {
     return Ember.RSVP.hash({
-       tracks: this.store.findAll('music'),
+       tracks: this.store.findAll('music').then(data => {
+         console.log(data);
+         return data;
+       }),
       //  playing: 0,
        user: this.get('ajax').request(`${ENV.serverURl}/user/profile`, {
-         data: {user: this.get('storage.user')}, method: 'GET'}),
+         data: {'api-key': this.get('storage.apiKey')}, method: 'GET'}),
      });
   },
 

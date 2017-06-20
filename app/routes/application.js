@@ -4,7 +4,7 @@ import { storageFor } from 'ember-local-storage';
 export default Ember.Route.extend({
   storage: storageFor('user'),
   redirect: function() {
-    if (Ember.isEmpty(this.get('storage.user'))) {
+    if (Ember.isEmpty(this.get('storage.apiKey'))) {
       if (window.location.pathname === '/register') {
         this.transitionTo('register');
       } else {

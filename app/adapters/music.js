@@ -1,14 +1,15 @@
 import JSONAPIAdapter from 'ember-data/adapters/json-api';
 import Ember from 'ember';
 import { storageFor } from 'ember-local-storage';
+import ENV from '../config/environment';
 
 export default JSONAPIAdapter.extend({
   storage: storageFor('user'),
-  host: 'http://localhost:5000',
+  host: `${ENV.serverURl}`,
   defaultSerializer: '-default',
-  headers: Ember.computed('storage.user', function() {
+  headers: Ember.computed('storage.apiKey', function() {
     return {
-      'Api-key': this.get('storage.user')
+      'Api-key': this.get('storage.apiKey')
     };
   }),
   pathForType: function(type) {
