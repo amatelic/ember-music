@@ -6,4 +6,5 @@ export default Model.extend({
   album: attr('string'),
   path: attr('string'),
   date: attr('moment'),
+  thumbnail: attr('string')
 });

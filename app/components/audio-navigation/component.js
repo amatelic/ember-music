@@ -15,6 +15,9 @@ export default Ember.Component.extend({
   classNameBindings: ['toggleNav'],
   toggleNav: false,
   classNames: ['audio__navigation'],
+  image: Ember.computed('thumbnail', function() {
+    return `http://localhost:5000/${this.get('thumbnail')}`;
+  }),
   actions: {
     hideNavigation() {
       this.sendAction('hideNavigation');

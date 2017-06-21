@@ -46,9 +46,9 @@ export default Ember.Route.extend({
       this.controllerFor('music').set('isLoading', true);
       Ember.$.ajax({
         type: 'POST',
-        url: `${ENV.serverURl}/new_folder`,
+        url: `${ENV.serverURl}/music/new_folder`,
         headers: {
-          'Api-key': this.get('storage.user'),
+          'Api-key': this.get('storage.apiKey'),
         },
         data: {
           name: name,
@@ -70,9 +70,9 @@ export default Ember.Route.extend({
       data.append('id', length);
       $.ajax({
         type: 'POST',
-        url: `${ENV.serverURl}/upload`,
+        url: `${ENV.serverURl}/music/upload`,
         headers: {
-          'Api-key': this.get('storage.user'),
+          'Api-key': this.get('storage.apiKey'),
         },
         dataType: 'json',
         processData:false,

@@ -2,6 +2,8 @@ import Ember from 'ember';
 import { EKMixin } from 'ember-keyboard';
 import { keyUp} from 'ember-keyboard';
 
+
+const serverURL = 'http://localhost:5000'
 //https://teamgaslight.com/blog/a-beginners-guide-to-the-ember-run-loop
 export default Ember.Component.extend(EKMixin, {
   classNames: ['video__player'],
@@ -95,7 +97,7 @@ export default Ember.Component.extend(EKMixin, {
   changeAudio(path) {
     this.set('toggle', false);
     let audio = this.get('audio');
-    audio.src = path;
+    audio.src = serverURL + path;
     this.get('audio').load();
     this.set('toggle', true);
 
@@ -129,7 +131,7 @@ export default Ember.Component.extend(EKMixin, {
     this.set('audio', new Audio());
 
     if (track) {
-      this.set('audio.src', track.get('path'));
+      this.set('audio.src', serverURL + track.get('path'));
       setTimeout(() => this.set('duration', this.get('audio.duration')), 500);
     }
 

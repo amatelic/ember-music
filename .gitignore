@@ -3,7 +3,9 @@
 # compiled output
 /dist
 /tmp
-
+/servers/files/audio
+/servers/files/thumbnail
+/servers/files/profiles
 # dependencies
 /node_modules
 /bower_components

@@ -49,7 +49,7 @@ app.delete('/music/:id', (req, res) => {
 //pridobivanje podatkov uporabnika iz podatkovne baze ob GET
 //zahtevi na url http://localhost:5000/profile
 
-app.use('/musics', express.static(__dirname + '/musics'));
+app.use('/files', express.static(__dirname + '/files'));
 app.use('/users', express.static(__dirname + '/users'));
 
 console.log(`Server enviroment: ${process.env.NODE_ENV}`);

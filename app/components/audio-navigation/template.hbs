@@ -18,9 +18,15 @@
   </div>
 </div>
 
-<div {{action "addFolder" }}class="playlist__create">
-  <div class="playlist__icon">
-    {{fa-icon "plus"}}
+<div>
+  <div {{action "addFolder" }}class="playlist__create">
+    <div class="playlist__icon">
+      {{fa-icon "plus"}}
+    </div>
+    <p class="playlist__text"> New </p>
   </div>
-  <p class="playlist__text"> New </p>
+
+  <div class="audio__thumbnail">
+    <img src={{image}} />
+  </div>
 </div>
