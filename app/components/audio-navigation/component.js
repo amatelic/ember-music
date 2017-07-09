@@ -42,7 +42,6 @@ export default Ember.Component.extend({
         e.target.value = '';
       }
 
-      //bug for adding again
     },
 
     selectFolder(folder) {

@@ -51,8 +51,8 @@ router.post('/upload', audioUpload.single('file'), (req, res) => {
       res.json(JSONAPI.serialize([]));
     })
     .catch(err => {
-      console.log(err)
-    })
+      console.log(err);
+    });
   //Pridobivanje podatkov seznama za shranjevanje podatkov
   //ter informacije o uporabniku
   // let {directory, id} = req.body;

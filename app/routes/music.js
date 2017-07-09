@@ -8,10 +8,7 @@ export default Ember.Route.extend({
   ajax: Ember.inject.service(),
   model() {
     return Ember.RSVP.hash({
-       tracks: this.store.findAll('music').then(data => {
-         console.log(data);
-         return data;
-       }),
+       tracks: this.store.findAll('music'),
       //  playing: 0,
        user: this.get('ajax').request(`${ENV.serverURl}/user/profile`, {
          data: {'api-key': this.get('storage.apiKey')}, method: 'GET'}),
@@ -93,7 +90,7 @@ export default Ember.Route.extend({
       this.controllerFor('music').set('directory', folder);
       folder = folder.toLowerCase();
       this.store.unloadAll();
-      this.store.queryRecord('music', { params: folder, reload: true });
+      this.store.query('music', { params: folder, reload: true })
     },
   },
 });
