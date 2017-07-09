@@ -74,18 +74,18 @@ router.post('/upload', audioUpload.single('file'), (req, res) => {
   // });
 });
 
-// router.post('/new_folder', (req, res) => {
-//   let directory = req.body.name;
-//   let email =  req.headers['api-key'];
-//   DB.update('user', {email}, {$push: {
-//     'directories': {
-//       name: directory,
-//       music: [],
-//     }
-//   }}, {multi: false});
-//   res.json({status: 200, dir: req.body.name});
-// });
+router.post('/new_folder', (req, res) => {
+  let folder = req.body.name;
+  const apiKey =  req.headers['api-key'];
 
+  User.addFolder(apiKey, folder)
+    .then(_ => {
+      res.json({status: 200, dir: folder});
+    })
+    .catch(_ => {
+      res.json({status: 404, message: 'There was an error'});
+    });
+});
 
 // Vtičnik za pridobivanje seznamov skladb in izbranega seznama
 // router.get('/music', (req, res) => {

@@ -40,6 +40,54 @@ class User {
     });
   }
 
+  update(apiKey, update) {
+    return new Promise(function(resolve, reject)  {
+      MongoClient.connect(url, function(err, db) {
+        if(err) { return reject(err); }
+        return db.collection('user')
+          .update({apiKey}, update, {multi: false}, (err, result) => {
+          db.close();
+          return (err) ? reject(err) : resolve(result);
+        });
+      });
+    });
+  }
+
+  addFolder(apiKey, folder) {
+    return this.update(apikey, {
+        $push: {
+         'directories': {
+          name: folder,
+          music: [],
+        }
+      }});
+  }
+
+  // createFolder(folder) {
+  //   return (user) => {
+  //     return user.update({
+  //       $push: {
+  //        'directories': {
+  //         name: folder,
+  //         music: [],
+  //       }
+  //     }}, {multi: false});
+  //   }
+  // }
+  // router.post('/new_folder', (req, res) => {
+  //   let directory = req.body.name;
+  //   const apiKey =  req.headers['api-key'];
+
+  //   User.addFolder(apiKey, dire)
+  //   DB.update('user', {email}, {$push: {
+  //     'directories': {
+  //       name: directory,
+  //       music: [],
+  //     }
+  //   }}, {multi: false});
+  //   res.json({status: 200, dir: req.body.name});
+  // });
+
   userDataStructure(email, password) {
     return {
       email: email,
