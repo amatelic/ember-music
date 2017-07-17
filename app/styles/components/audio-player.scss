@@ -1,3 +1,28 @@
+.flex-1-3 {
+  width: 30%;
+  height: 100%;
+  display: flex;
+}
+
+.align-center {
+  align-items: center;
+}
+
+.justify-center {
+  justify-content: center;
+}
+
+.justify-end {
+  justify-content: flex-end;
+}
+
+.justify-start {
+  justify-content: flex-start;
+}
+
+.ml-15 {
+  margin-left: 15px;
+}
 
 .audio__player {
   background: black;
@@ -12,21 +37,14 @@
   bottom: 0;
 }
 
-.audio__extra,
 .audio__track {
-  width: 20%;
+  width: 100%;
+  height: auto;
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-.duration__time {
-  width: 60%;
-}
-
-.duration__time__numbers {
-  width: 10%;
-}
 
 .duration__time__range {
   width: 100%;
@@ -44,7 +62,7 @@ input[type=range] {
   margin: 0px;
   width: 100%;
   height: inherit;
-  background: #7e4554;
+  background: $secondary_color;
 }
 
 .player_range::-webkit-slider-thumb  {
@@ -55,33 +73,16 @@ input[type=range] {
   width: 100%;
 }
 
-// input[type=range]::-webkit-slider-thumb {
-//   background: red;
-// }
-
-
-// .audio__track {
-//   width: 35%;
-//   display: flex;
-//   margin-left: 10px;
-//   margin-right: 10px;
-//   padding: 10px 0px;
-//   justify-content: center;
-//   align-items: center;
-//   justify-content: space-around;
-// }
-
-
 .step__button {
   display: flex;
   cursor: pointer;
   align-items: center;
   font-size: 1.2em;
+  margin: 0px 15px;
 }
 
 
 .play__button {
-  margin-top: -5px;
   width: 30px;
   height: 30px;
   display: flex;
@@ -90,6 +91,7 @@ input[type=range] {
   align-items: center;
   color: $audio__player__basic;
   border-radius: 50%;
+  transform: scale(0.9);
   border: 2px solid white;
 }
 
@@ -103,6 +105,7 @@ input[type=range] {
     border: initial;
     margin: 2px;
     -webkit-appearance: none;
+    transform: translateY(-5px);
 }
 
 .player_range::-webkit-slider-thumb {
@@ -132,59 +135,9 @@ input[type=range] {
   flex-direction: row;
 }
 
-// .duration__time__numbers {
-//   display: flex;
-//   justify-content: center;
-//   width: 15%;
-// }
-
-// .duration__time__numbers p {
-//   width: auto;
-// }
-
-// .duration__time__range {
-//   width: 40%;
-//   display: flex;
-//   justify-content: center;
-//   align-items: center;
-// }
-// .duration__time,
-// .duration__time__numbers {
-//   width: 20%;
-
-// }
-// .duration__time__range {
-//   width: 80%;
-// }
-// .duration__time__numbers > p {
-//   margin-left: 5px
-// }
-// .duration__time__range > input[type=range] {
-//   outline: none;
-//   height: 5px;
-//   width: 80%;
-//   margin-bottom: 5px;
-//   background: green;
-//   cursor: pointer;
-//   -webkit-appearance: none;
-// }
-
-// .volume__range {
-//   display: flex;
-//   margin: 7px;
-//   justify-content: center;
-//   align-self: center;
-//   width: 20%;
-// }
-
-// .volume__range > input {
-//   width: 80%;
-//   cursor: pointer;
-// }
-
-// .is--Active {
-//   color: $green-3;
-// }
+.is--Active {
+  color: $secondary_color;
+}
 
 // @media (min-width: 800px) {
 //   .audio__player {
