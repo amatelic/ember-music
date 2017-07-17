@@ -46,6 +46,46 @@
   object-fit: cover
 }
 
+
+.playlist__create {
+  display: flex;
+  box-sizing: border-box;
+  padding: 5px 5%;
+  justify-content: flex-start;
+  align-items: center;
+  border-top: 1px solid white;
+  cursor: pointer;
+}
+
+.playlist__create:hover {
+  background: #4c2630;
+}
+
+.playlist__icon {
+  display: flex;
+  width: 20px;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid white;
+  border-radius: 40px;
+  padding: 5px 5px;
+  margin: 0px 5px 0px 0px;
+}
+
+.playlist__text {
+  margin: 0px 0px 0px 5px;
+}
+
+.playlist__input {
+  margin: 0px 10px 0px 0px;
+  padding: 0px 10px;
+  border-radius: 5px;
+  border: none;
+  height: 25px;
+  width: 80%;
+}
+
 // .audio__playlist__controls
 // .audio__navigation
 //   width: 30%
