@@ -53,6 +53,19 @@ class User {
     });
   }
 
+  set(apiKey, update) {
+    return new Promise(function(resolve, reject)  {
+      MongoClient.connect(url, function(err, db) {
+        if(err) { return reject(err); }
+        return db.collection('user')
+          .update({apiKey}, { $set: update }, {multi: false}, (err, result) => {
+          db.close();
+          return (err) ? reject(err) : resolve(result);
+        });
+      });
+    });
+  }
+
   addFolder(apiKey, folder) {
     return this.update(apikey, {
         $push: {

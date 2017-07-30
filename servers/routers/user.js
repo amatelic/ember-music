@@ -1,7 +1,20 @@
 const express = require('express');
+const multer  = require('multer');
 const User = require('../service/user-service');
 const Response = require('../service/response-service');
 const USER_RESPONSES = require('../response-metadata/user');
+
+// Storage location
+const userStorage = multer.diskStorage({
+  destination: (req, file, cb) => {
+      cb(null, './servers/files/profiles/');
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.originalname);
+  },
+});
+
+var userUpload = multer({ storage: userStorage });
 
 const router = express.Router();
 
@@ -12,6 +25,18 @@ router.get('/profile', function(req, res) {
       res.json(user);
     });
   // TODO work on errors;
+});
+
+router.post('/profile/update', userUpload.single('file'), function(req, res) {
+  const path = req.file.path;
+  const email = req.body.email;
+  const apiKey = req.body['apiKey'];
+  User.set(apiKey, {
+    image: path.replace('servers/', ''),
+  })
+    .then(user => {
+      res.json({});
+    });
 });
 
 router.post('/', function(req, res) {
@@ -39,18 +64,6 @@ router.post('/register', function(req, res) {
             .then(db => res.json(Response.ok({ apiKey: db.ops[0].apiKey})));
     })
     .catch(d => console.log('err', d));
-  //preverjanje ali uporabnik obstaja
-  // DB.dataExist('user', {email, password},
-    //Če uporabnik obstaja se  izvede ta metoda,
-    //ki vrne odgovor uporabnik obstaja.
-    // (data) => res.json(RS.exist()),
-    //V primeru, da uporabnik ne obstaja
-    //potem se izvede ta metoda, ki najprej uporabnika
-    //shrane, ter pošlje odgovor, da je vse vredu.
-    // (data) => {
-    //   DB.insert('user', createUser(req.body),
-    //   (err, result) => { res.json(RS.normal({email})); });
-    // });
 });
 
 // app.post('/user', (req, res) => {

@@ -24,17 +24,18 @@ export default Ember.Route.extend({
       }
       formData.append("username", this.controllerFor("user").get('model.username'));
       formData.append("email", this.controllerFor("user").get('model.email')); // number 123456 is immediately converted to a string "123456"
+      formData.append("apiKey", this.get('storage.apiKey'));
       formData.append("file", data);
       var request = new XMLHttpRequest();
-      request.open("POST", `${ENV.serverURl}/profile`);
+      request.open("POST", `${ENV.serverURl}/user/profile/update`);
       request.send(formData);
       request.onload = function() {
       if (request.status === 200) {
-        alert('success');
+        this.transitionTo('music');
       } else {
         alert('fail');
       }
-    };
+    }.bind(this);
     }
   }
 });
