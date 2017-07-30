@@ -72,15 +72,4 @@ router.post('/register', function(req, res) {
 // });
 
 
-// app.post('/profile', uploadUser.single('file'),(req, res) => {
-//   let {email, username, image} = req.body;
-//   DB.update('user', { email }, {$set:{ username, image }});
-
-//   res.json({
-//     user: 'Anze Matelic',
-//     email: 'amatelic93@gmail.com',
-//   });
-// });
-
-
 module.exports = router;

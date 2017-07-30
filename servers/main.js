@@ -16,34 +16,10 @@ app.use(cors());
 app.use('/user', user);
 app.use('/music', music);
 
-// var storage = multer.diskStorage({
-//   destination: (req, file, cb) => cb(null, 'musics/'),
-//   filename: function(req, file, cb) {
-//     crypto.pseudoRandomBytes(16, function(err, raw) {
-//       cb(null, file.originalname);
-//     });
-//   },
-// });
-
-// var storage2 = multer.diskStorage({
-//   destination: (req, file, cb) => cb(null, 'users/'),
-//   filename: function(req, file, cb) {
-//     crypto.pseudoRandomBytes(16, function(err, raw) {
-//       cb(null, file.originalname);
-//     });
-//   },
-// });
-
-// var upload = multer({ storage: storage });
-// var uploadUser = multer({ storage: storage2});
-
 app.get('/', (req, res) => {
     res.json({message: 'Music app server is running'});
 });
 
-app.delete('/music/:id', (req, res) => {
-    res.json({}, 204);
-});
 
 
 //pridobivanje podatkov uporabnika iz podatkovne baze ob GET

@@ -35,7 +35,7 @@ export default Ember.Route.extend({
   actions: {
 
     logOut() {
-      this.set('storage.user', undefined);
+      this.get('storage').reset();
       this.transitionTo('login');
     },
 
