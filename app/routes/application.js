@@ -1,4 +1,6 @@
 import Ember from 'ember';
+import $ from 'jquery';
+import ENV from '../config/environment';
 import { storageFor } from 'ember-local-storage';
 
 export default Ember.Route.extend({
@@ -22,7 +24,7 @@ export default Ember.Route.extend({
       this.controllerFor('application').set('position', [evt.x, evt.y]);
     },
 
-    hidePropery() {
+    hidePropery(id) {
       this.controllerFor('application').set('show', false);
     },
   }

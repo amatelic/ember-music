@@ -36,6 +36,7 @@
 .audio__playlist__item {
   display: flex;
   flex-direction: row;
+  cursor: pointer;
 }
 
 .active__track {

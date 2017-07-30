@@ -38,14 +38,34 @@ class Audio {
           db.collection('user')
             .update({
               apiKey,
-                'directories.name': directory
+              'directories.name': directory
             }, {
               $push: {
                 'directories.$.music':  audio,
               }
           },(err, res) => {
             db.close();
-            return err ? reject(err) : resolve(res);
+            return err ? reject(err) : resolve(audio);
+          });
+        });
+    });
+  }
+
+  deleteMusic(apiKey, id) {
+    return new Promise(function(resolve, reject)  {
+        MongoClient.connect(url, function(err, db) {
+          if(err) { return reject(err); }
+          db.collection('user')
+            .update({
+              apiKey,
+              'directories.name': 'all'
+            }, {
+              $pull: {
+                'directories.$.music': { id: ObjectID(id) },
+              }
+          },(err, res) => {
+            db.close();
+            return err ? reject(err) : resolve(true);
           });
         });
     });
@@ -56,7 +76,6 @@ class Audio {
     const stream = fs.createReadStream(file);
     return new Promise((resolve, reject)  => {
       mm(stream, (err, metadata) => {
-      console.log(err)
       if (err) {
         return reject(err);
       };
@@ -87,18 +106,16 @@ class Audio {
   }
 
   parser(metadata) {
-    console.log(1,metadata)
     const picture = this.extractPicture(metadata.title, metadata.picture);
-      console.log(2,picture)
 
     return {
       title: metadata.title,
       artist: metadata.albumartist,
       album: metadata.album,
       date: moment().format(),
-      thumbnail: picture[0].path,
-      stream: picture[0].stream,
-    }
+      thumbnail: picture && picture[0].path,
+      stream: picture && picture[0].stream,
+    };
   }
 
   extractPicture(title, pictures) {

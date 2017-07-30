@@ -16,7 +16,12 @@ export default Ember.Component.extend({
   toggleNav: false,
   classNames: ['audio__navigation'],
   image: Ember.computed('thumbnail', function() {
-    return `http://localhost:5000/${this.get('thumbnail')}`;
+    console.log(this.get('thumbnail'))
+    const image = (this.get('thumbnail'))
+      ?  `http://localhost:5000/${ this.get('thumbnail')  }`
+      : 'http://blog.blogtalkradio.com/wp-content/uploads/2011/10/Audio_Icon.jpg';
+
+      return image;
   }),
   actions: {
     hideNavigation() {

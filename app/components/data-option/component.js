@@ -22,10 +22,10 @@ export default Ember.Component.extend({
       link.click();
     },
     delete() {
-      // /destroyRecord
-      this.get('data').destroyRecord().then(function(d) {
-        this.sendAction('hidePropery');
-      }.bind(this));
+      this.get('data').destroyRecord()
+        .then(function({ id }) {
+          this.sendAction('hidePropery', id);
+        }.bind(this));
     }
   }
 });

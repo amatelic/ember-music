@@ -65,6 +65,7 @@ export default Ember.Route.extend({
       data.append('directory', dir);
       data.append('file', file);
       data.append('id', length);
+
       $.ajax({
         type: 'POST',
         url: `${ENV.serverURl}/music/upload`,
@@ -90,7 +91,8 @@ export default Ember.Route.extend({
       this.controllerFor('music').set('directory', folder);
       folder = folder.toLowerCase();
       this.store.unloadAll();
-      this.store.query('music', { params: folder, reload: true })
+      this.store.query('music', { params: folder, reload: true });
     },
   },
+
 });
